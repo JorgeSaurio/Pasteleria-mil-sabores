@@ -1,1 +1,11 @@
 /* Pastelería Mil Sabores - hoja de estilos */
+
+.navbar-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+}
