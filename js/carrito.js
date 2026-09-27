@@ -1,84 +1,134 @@
+const CLAVE_CARRITO = "mil_sabores_carrito";
+const CLAVE_CUPON = "mil_sabores_cupon";
+
 /**
- * Lógica de Carrito de Compras con persistencia en LocalStorage
- * Proyecto: Pastelería 1000 Sabores
+ * Obtiene la lista actual de productos del carrito con control de errores
+ * @returns {Array} Colección de productos
  */
+function obtenerCarritoSeguro() {
+  try {
+    const data = localStorage.getItem(CLAVE_CARRITO);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error("Error al leer el carrito de localStorage:", error);
+    localStorage.removeItem(CLAVE_CARRITO);
+    return [];
+  }
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Clave única acordada para LocalStorage
-  const CLAVE_STORAGE = "mil_sabores_carrito";
+function formatearMoneda(monto) {
+  return "$" + Number(monto || 0).toLocaleString("es-CL");
+}
 
-  // Carga demostrativa inicial si no hay datos almacenados
-  if (!localStorage.getItem(CLAVE_STORAGE)) {
-    const productosEjemplo = [
-      {
-        id: "TC001",
-        nombre: "Torta Cuadrada de Chocolate",
-        precio: 45000,
-        cantidad: 1,
-        imagen: "logo.jpeg",
-        descripcion: "Deliciosa torta con ganache de chocolate y toque de avellanas."
-      },
-      {
-        id: "TT001",
-        nombre: "Torta Circular de Vainilla",
-        precio: 40000,
-        cantidad: 2,
-        imagen: "logo.jpeg",
-        descripcion: "Clásica masa de vainilla rellena con suave crema pastelera."
-      }
-    ];
-    localStorage.setItem(CLAVE_STORAGE, JSON.stringify(productosEjemplo));
+function actualizarContadorNav() {
+  const contador = document.getElementById("nav-carrito-contador");
+  if (!contador) return;
+  const carrito = obtenerCarritoSeguro();
+  const totalItems = carrito.reduce((acum, item) => acum + (item.cantidad || 0), 0);
+  contador.textContent = totalItems;
+}
+
+
+window.agregarAlCarrito = function (id, nombre, precio, imagen = "logo.jpeg", descripcion = "", cantidad = 1) {
+  if (!id || !nombre || precio === undefined) {
+    console.warn("agregarAlCarrito: Parámetros inválidos", { id, nombre, precio });
+    return;
   }
 
-  let carrito = JSON.parse(localStorage.getItem(CLAVE_STORAGE)) || [];
-  let porcentajeDescuento = 0;
+  let carrito = obtenerCarritoSeguro();
+  const itemExistente = carrito.find(p => p.id === id);
 
-  // Nodos del DOM
+  if (itemExistente) {
+    itemExistente.cantidad += Number(cantidad);
+  } else {
+    carrito.push({
+      id: String(id),
+      nombre: String(nombre),
+      precio: Number(precio),
+      cantidad: Number(cantidad),
+      imagen: imagen || "logo.jpeg",
+      descripcion: descripcion || ""
+    });
+  }
+
+  localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+  actualizarContadorNav();
+
+  // Si estamos en la vista de carrito.html, refrescar la tabla
+  if (typeof window.renderizarVistaCarrito === "function") {
+    window.renderizarVistaCarrito();
+  }
+};
+
+window.modificarCantidad = function (id, delta) {
+  let carrito = obtenerCarritoSeguro();
+  const item = carrito.find(p => p.id === id);
+
+  if (item) {
+    item.cantidad += Number(delta);
+    if (item.cantidad <= 0) {
+      carrito = carrito.filter(p => p.id !== id);
+    }
+    localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+    actualizarContadorNav();
+    if (typeof window.renderizarVistaCarrito === "function") {
+      window.renderizarVistaCarrito();
+    }
+  }
+};
+
+window.eliminarProducto = function (id) {
+  let carrito = obtenerCarritoSeguro();
+  carrito = carrito.filter(p => p.id !== id);
+  localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+  actualizarContadorNav();
+  if (typeof window.renderizarVistaCarrito === "function") {
+    window.renderizarVistaCarrito();
+  }
+};
+
+window.vaciarCarrito = function () {
+  localStorage.removeItem(CLAVE_CARRITO);
+  actualizarContadorNav();
+  if (typeof window.renderizarVistaCarrito === "function") {
+    window.renderizarVistaCarrito();
+  }
+};
+
+// Inicialización de la vista cuando se está en carrito.html
+document.addEventListener("DOMContentLoaded", () => {
+  actualizarContadorNav();//actualiza el numerito del logo en el navbar
+
+  // Nodos específicos de la pantalla carrito.html
   const contenedorLista = document.getElementById("lista-carrito");
   const contenedorVacio = document.getElementById("carrito-vacio");
   const labelSubtotal = document.getElementById("resumen-subtotal");
   const labelDescuento = document.getElementById("resumen-descuento");
   const filaDescuento = document.getElementById("fila-descuento");
   const labelTotal = document.getElementById("resumen-total");
-  const contadorNav = document.getElementById("nav-carrito-contador");
   const inputCupon = document.getElementById("input-cupon");
   const btnCupon = document.getElementById("btn-aplicar-cupon");
   const msgCupon = document.getElementById("mensaje-cupon");
   const btnPagar = document.getElementById("btn-pagar");
 
-  // Formateo de moneda CLP
-  const formatearMoneda = (monto) => "$" + monto.toLocaleString("es-CL");
+  // Si no estamos en la página del carrito, terminamos aquí
+  if (!contenedorLista) return;
 
-  // Guardar estado actual en LocalStorage
-  const guardarCarrito = () => {
-    localStorage.setItem(CLAVE_STORAGE, JSON.stringify(carrito));
-    renderizarCarrito();
-  };
-
-  // Métodos expuestos globalmente para eventos onclick en el HTML generado
-  window.modificarCantidad = (id, delta) => {
-    const item = carrito.find(p => p.id === id);
-    if (item) {
-      item.cantidad += delta;
-      if (item.cantidad <= 0) {
-        carrito = carrito.filter(p => p.id !== id);
-      }
-      guardarCarrito();
+  /**
+   * Determina el descuento vigente consultando el cupón persistente
+   */
+  function obtenerPorcentajeDescuento() {
+    const cuponGuardado = (localStorage.getItem(CLAVE_CUPON) || "").toUpperCase();
+    if (cuponGuardado === "FELICES50") {
+      return 0.10;
     }
-  };
+    return 0;
+  }
 
-  window.eliminarProducto = (id) => {
-    carrito = carrito.filter(p => p.id !== id);
-    guardarCarrito();
-  };
-
-  // Renderizado dinámico de la lista de productos
-  const renderizarCarrito = () => {
-    if (!contenedorLista) return;
-
+  window.renderizarVistaCarrito = function () {
+    const carrito = obtenerCarritoSeguro();
     contenedorLista.innerHTML = "";
     let subtotal = 0;
-    let totalItems = 0;
 
     if (carrito.length === 0) {
       if (contenedorVacio) contenedorVacio.classList.remove("d-none");
@@ -90,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
       carrito.forEach(producto => {
         const itemSubtotal = producto.precio * producto.cantidad;
         subtotal += itemSubtotal;
-        totalItems += producto.cantidad;
 
         const card = document.createElement("article");
         card.className = "card border-0 shadow-sm p-3";
@@ -118,13 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Cálculos y totales
+    const porcentajeDescuento = obtenerPorcentajeDescuento();
     const descuentoMonto = Math.round(subtotal * porcentajeDescuento);
-    const total = subtotal - descuentoMonto;
+    const total = Math.max(0, subtotal - descuentoMonto);
 
     if (labelSubtotal) labelSubtotal.textContent = formatearMoneda(subtotal);
     if (labelTotal) labelTotal.textContent = formatearMoneda(total);
-    if (contadorNav) contadorNav.textContent = totalItems;
 
     if (filaDescuento && labelDescuento) {
       if (porcentajeDescuento > 0) {
@@ -136,38 +184,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Evento: Aplicar Cupón (Regla de negocio: FELICES50 = 10% descuento)
+  // Restaurar estado visual del cupón si ya estaba persistido
+  const cuponPrevio = localStorage.getItem(CLAVE_CUPON);
+  if (cuponPrevio && inputCupon && msgCupon) {
+    inputCupon.value = cuponPrevio;
+    if (cuponPrevio.toUpperCase() === "FELICES50") {
+      msgCupon.className = "form-text text-success";
+      msgCupon.textContent = "Cupón FELICES50 activo: 10% de descuento aplicado de por vida.";
+    }
+  }
+
+  // Evento: Aplicar y persistir cupón
   if (btnCupon && inputCupon && msgCupon) {
     btnCupon.addEventListener("click", () => {
       const codigo = inputCupon.value.trim().toUpperCase();
+
       if (codigo === "FELICES50") {
-        porcentajeDescuento = 0.10;
+        localStorage.setItem(CLAVE_CUPON, "FELICES50");
         msgCupon.className = "form-text text-success";
         msgCupon.textContent = "Cupón FELICES50 aplicado: 10% de descuento.";
       } else if (codigo === "") {
-        porcentajeDescuento = 0;
+        localStorage.removeItem(CLAVE_CUPON);
         msgCupon.className = "form-text text-muted";
         msgCupon.textContent = "";
       } else {
-        porcentajeDescuento = 0;
+        localStorage.removeItem(CLAVE_CUPON);
         msgCupon.className = "form-text text-danger";
         msgCupon.textContent = "Cupón inválido o caducado.";
       }
-      renderizarCarrito();
+
+      window.renderizarVistaCarrito();
     });
   }
 
-  // Evento: Confirmación de Pago
+  // Evento: Pagar y confirmación
   if (btnPagar) {
     btnPagar.addEventListener("click", () => {
+      const carrito = obtenerCarritoSeguro();
       if (carrito.length > 0) {
         alert("¡Pedido confirmado con éxito! Gracias por celebrar los 50 años de Pastelería Mil Sabores.");
-        carrito = [];
-        guardarCarrito();
+        localStorage.removeItem(CLAVE_CARRITO);
+        actualizarContadorNav();
+        window.renderizarVistaCarrito();
       }
     });
   }
 
-  // Inicialización
-  renderizarCarrito();
+  window.renderizarVistaCarrito();
 });
