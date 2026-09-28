@@ -9,7 +9,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Barra de navegación estándar -->
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">Mil Sabores</a>
@@ -50,9 +50,8 @@
     </div>
   </nav>
 
-  <!-- Contenedor Principal -->
+
   <main class="container my-5 flex-grow-1">
-    <!-- Migas de pan (Breadcrumb) -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Inicio</a></li>
@@ -61,26 +60,26 @@
       </ol>
     </nav>
 
-    <!-- Ficha del Producto -->
+
     <div class="row g-5 mb-5 align-items-center">
-      <!-- Galería / Imagen Principal -->
       <div class="col-md-6 text-center">
         <div class="card border-0 shadow-sm p-4 bg-light">
           <img id="img-producto" src="logo.jpeg" alt="Producto" class="img-fluid rounded" style="max-height: 380px; object-fit: contain;">
         </div>
       </div>
 
-      <!-- Información y Selección de Compra -->
+
       <div class="col-md-6">
         <span id="categoria-producto" class="badge bg-secondary mb-2">Categoría</span>
         <h1 id="nombre-producto" class="display-6 fw-bold mb-2">Cargando producto...</h1>
         <div class="h3 text-success fw-bold mb-4" id="precio-producto">$0</div>
 
+
         <p id="descripcion-producto" class="lead fs-6 text-muted mb-4">
           Descripción detallada del producto.
         </p>
 
-        <!-- Selector de Cantidad -->
+
         <div class="row align-items-center g-3 mb-4">
           <div class="col-auto">
             <label for="cantidad-producto" class="col-form-label fw-bold">Cantidad:</label>
@@ -90,7 +89,7 @@
           </div>
         </div>
 
-        <!-- Botón de Acción -->
+
         <div class="d-grid gap-2 d-md-flex">
           <button id="btn-agregar-detalle" class="btn btn-primary btn-lg px-4 fw-bold">
             Añadir al carrito
@@ -105,81 +104,27 @@
       </div>
     </div>
 
-    <!-- Sección Productos Relacionados -->
+
     <section class="mt-5 border-top pt-4">
-      <h3 class="fw-bold mb-4">Productos Relacionados</h3>
+      <h2 class="h4 fw-bold mb-4">Productos Relacionados</h2>
       <div id="grilla-relacionados" class="row row-cols-2 row-cols-md-4 g-3">
-        <!-- Renderizado por JS -->
       </div>
     </section>
   </main>
 
-  <!-- Footer estándar -->
+
   <footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
       <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 — 50 Años Endulzando Momentos</p>
-      <small class="text-secondary">Proyecto Fullstack — Escuela de Informática y Telecomunicaciones, Duoc UC</small>
     </div>
   </footer>
 
-  <!-- Scripts -->
+
+  <!-- Scripts: datos -> carrito -> script de la página -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/productos.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const prodId = urlParams.get("id") || "TC001";
-
-      const producto = CATALOGO_PRODUCTOS.find(p => p.id === prodId) || CATALOGO_PRODUCTOS[0];
-
-      // Inyección de datos
-      document.title = `Pastelería Mil Sabores | ${producto.nombre}`;
-      document.getElementById("breadcrumb-actual").textContent = producto.nombre;
-      document.getElementById("nombre-producto").textContent = producto.nombre;
-      document.getElementById("categoria-producto").textContent = producto.categoria;
-      document.getElementById("precio-producto").textContent = formatearMoneda(producto.precio);
-      document.getElementById("descripcion-producto").textContent = producto.descripcion;
-      document.getElementById("img-producto").src = producto.imagen;
-
-      // Evento de agregado
-      const btnAgregar = document.getElementById("btn-agregar-detalle");
-      const inputCantidad = document.getElementById("cantidad-producto");
-      const alerta = document.getElementById("alerta-agregado");
-
-      btnAgregar.addEventListener("click", () => {
-        const cant = parseInt(inputCantidad.value, 10) || 1;
-        agregarAlCarrito(producto.id, cant);
-
-        alerta.classList.remove("d-none");
-        setTimeout(() => {
-          alerta.classList.add("d-none");
-        }, 2500);
-      });
-
-      // Productos relacionados (misma categoría o complementarios)
-      const contenedorRel = document.getElementById("grilla-relacionados");
-      const relacionados = CATALOGO_PRODUCTOS.filter(p => p.id !== producto.id).slice(0, 4);
-
-      relacionados.forEach(p => {
-        const col = document.createElement("div");
-        col.className = "col";
-        col.innerHTML = `
-          <div class="card h-100 border-0 shadow-sm text-center p-2">
-            <a href="detalle-producto.html?id=${p.id}">
-              <img src="p.imagen"class="card-img-topmx-auto"alt="{p.nombre}" style="height: 100px; object-fit: contain;">
-            </a>
-            <div class="card-body p-2">
-              <h6 class="card-title small fw-bold mb-1">
-                <a href="detalle-producto.html?id=p.id"class="text-darktext-decoration-none">{p.nombre}</a>
-              </h6>
-              <span class="text-muted small">${formatearMoneda(p.precio)}</span>
-            </div>
-          </div>
-        `;
-        contenedorRel.appendChild(col);
-      });
-    });
-  </script>
+  <script src="js/datos-catalogo.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/detalle.js"></script>
 </body>
 </html>
 
