@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pastelería Mil Sabores | Mi Carrito</title>
+  <title>Pastelería Mil Sabores | Carrito</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
-
+<body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="index.html">Mil Sabores</a>
@@ -36,7 +35,7 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="carrito.html">
-              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito <span id="nav-carrito-contador" class="badge bg-secondary ms-1">0</span>
+              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito
             </a>
           </li>
           <li class="nav-item">
@@ -49,73 +48,7 @@
     </div>
   </nav>
 
-  <!-- Contenedor Principal: Carrito de Compras -->
-  <main class="container my-5 flex-grow-1">
-    <h1 class="display-6 fw-bold mb-4">Mi carrito de compras</h1>
-
-    <div class="row g-5">
-      <!-- Lista de Productos en el Carrito (Columna Izquierda) -->
-      <section class="col-lg-8">
-        <div id="lista-carrito" class="d-flex flex-column gap-3">
-          <!-- Renderizado dinámico desde JavaScript -->
-        </div>
-
-        <!-- Alerta de Carrito Vacío -->
-        <div id="carrito-vacio" class="alert alert-info text-center py-5 d-none shadow-sm">
-          <h4 class="alert-heading">Tu carrito está vacío</h4>
-          <p class="mb-3">Aún no has añadido deliciosas tortas o postres a tu pedido.</p>
-          <a href="productos.html" class="btn btn-outline-primary">Explorar Productos</a>
-        </div>
-      </section>
-
-      <!-- Panel Lateral de Resumen y Pago (Columna Derecha - Figura 15) -->
-      <aside class="col-lg-4">
-        <div class="card border-0 shadow-sm p-4 bg-light">
-          <h2 class="h4 fw-bold mb-3">Resumen de Compra</h2>
-          
-          <div class="d-flex justify-content-between mb-2">
-            <span class="text-muted">Subtotal</span>
-            <span id="resumen-subtotal" class="fw-semibold">$0</span>
-          </div>
-
-          <div id="fila-descuento" class="d-flex justify-content-between mb-2 text-success d-none">
-            <span>Descuento aplicado</span>
-            <span id="resumen-descuento">-$0</span>
-          </div>
-
-          <hr>
-
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <span class="h5 fw-bold mb-0">TOTAL:</span>
-            <span id="resumen-total" class="h4 fw-bold text-dark mb-0">$0</span>
-          </div>
-
-          <!-- Cupón de descuento -->
-          <div class="mb-4">
-            <label for="input-cupon" class="form-label small text-muted">Ingrese el cupón de descuento</label>
-            <div class="input-group">
-              <input type="text" id="input-cupon" class="form-control" placeholder="Ej: FELICES50">
-              <button id="btn-aplicar-cupon" class="btn btn-outline-secondary" type="button">APLICAR</button>
-            </div>
-            <div id="mensaje-cupon" class="form-text mt-1"></div>
-          </div>
-
-          <!-- Botón de Pago Principal -->
-          <button id="btn-pagar" class="btn btn-success btn-lg w-100 py-2 fw-bold shadow-sm">PAGAR</button>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <!-- Footer con clases utilitarias de Bootstrap -->
-  <footer class="bg-dark text-white py-4 mt-auto">
-    <div class="container text-center">
-      <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 - 50 Años Endulzando Momentos</p>
-    </div>
-  </footer>
-
-  <!-- Scripts: carrito (esta vista no necesita el catálogo) -->
+  <!-- Carrito de compras -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/carrito.js"></script>
 </body>
 </html>
