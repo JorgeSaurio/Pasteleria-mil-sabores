@@ -1,4 +1,3 @@
-// Catálogo
 const CATALOGO_PRODUCTOS = [
   {
     id: "TC001",
@@ -130,50 +129,24 @@ const CATALOGO_PRODUCTOS = [
   }
 ];
 
-const CLAVE_STORAGE = "mil_sabores_carrito";
 
-// Formato de moneda
-function formatearMoneda(monto) {
-  return "$" + monto.toLocaleString("es-CL");
+/** Categorías únicas del catálogo, en orden de aparición */
+const CATEGORIAS_PRODUCTOS = [...new Set(CATALOGO_PRODUCTOS.map(p => p.categoria))];
+
+
+/** Imagen usada cuando un producto no declara una válida */
+const IMAGEN_POR_DEFECTO = "logo.jpeg";
+
+
+/**
+ * Busca un producto del catálogo por su id
+ * @param {string} id
+ * @returns {object|null} El producto o null si no existe
+ */
+function obtenerProductoPorId(id) {
+  if (!id) return null;
+  return CATALOGO_PRODUCTOS.find(p => p.id === id) || null;
 }
 
-// Obtener carrito actual
-function obtenerCarrito() {
-  return JSON.parse(localStorage.getItem(CLAVE_STORAGE)) || [];
-}
 
-// Actualizar indicador del navbar
-function actualizarContadorNav() {
-  const contador = document.getElementById("nav-carrito-contador");
-  if (!contador) return;
-  const carrito = obtenerCarrito();
-  const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-  contador.textContent = total;
-}
 
-// Agregar producto al LocalStorage
-function agregarAlCarrito(productoId, cantidad = 1) {
-  const producto = CATALOGO_PRODUCTOS.find(p => p.id === productoId);
-  if (!producto) return;
-
-  const carrito = obtenerCarrito();
-  const itemExistente = carrito.find(p => p.id === productoId);
-
-  if (itemExistente) {
-    itemExistente.cantidad += cantidad;
-  } else {
-    carrito.push({
-      id: producto.id,
-      nombre: producto.nombre,
-      precio: producto.precio,
-      cantidad: cantidad,
-      imagen: producto.imagen,
-      descripcion: producto.descripcion
-    });
-  }
-
-  localStorage.setItem(CLAVE_STORAGE, JSON.stringify(carrito));
-  actualizarContadorNav();
-}
-
-document.addEventListener("DOMContentLoaded", actualizarContadorNav);
