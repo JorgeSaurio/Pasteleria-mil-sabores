@@ -12,7 +12,9 @@ const DURACION_NOTIFICACION_MS = 2600;
  * @returns {string}
  */
 function obtenerImagenPorDefecto() {
-  return typeof IMAGEN_POR_DEFECTO !== "undefined" ? IMAGEN_POR_DEFECTO : "logo.jpeg";
+  return typeof IMAGEN_POR_DEFECTO !== "undefined"
+    ? IMAGEN_POR_DEFECTO
+    : "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Flogo.jpeg";
 }
 
 /**
@@ -110,7 +112,7 @@ window.obtenerCarritoSeguro = obtenerCarritoSeguro;
  * @returns {boolean} true si el producto se agregó o se acumuló
  */
 window.agregarAlCarrito = function (idProducto, cantidad = 1) {
-  if (typeof CATALOGO_PRODUCTOS === "undefined") {
+  if (typeof obtenerProductoPorId !== "function") {
     console.error("agregarAlCarrito: falta js/datos-catalogo.js en esta página");
     mostrarNotificacion("No se pudo agregar el producto.", "danger");
     return false;
@@ -132,6 +134,18 @@ window.agregarAlCarrito = function (idProducto, cantidad = 1) {
 
   const carrito = obtenerCarritoSeguro();
   const itemExistente = carrito.find(p => p.id === producto.id);
+  const pedido = (itemExistente ? itemExistente.cantidad : 0) + Math.floor(delta);
+
+  if (typeof tieneStock === "function" && !tieneStock(producto, pedido)) {
+    const disponible = Number(producto.stock);
+    mostrarNotificacion(
+      disponible <= 0
+        ? `${producto.nombre} no tiene stock disponible.`
+        : `Solo quedan ${disponible} unidades de ${producto.nombre}.`,
+      "warning"
+    );
+    return false;
+  }
 
   if (itemExistente) {
     itemExistente.cantidad = Math.min(itemExistente.cantidad + Math.floor(delta), CANTIDAD_MAXIMA_ITEM);
@@ -163,7 +177,20 @@ window.modificarCantidad = function (id, delta) {
   const item = carrito.find(p => p.id === id);
   if (!item) return false;
 
-  item.cantidad += Number(delta);
+  const incremento = Number(delta);
+  if (incremento > 0 && typeof tieneStock === "function") {
+    const producto = obtenerProductoPorId(id);
+    if (producto && !tieneStock(producto, item.cantidad + incremento)) {
+      const disponible = Number(producto.stock);
+      mostrarNotificacion(
+        `Solo quedan ${disponible} unidades de ${producto.nombre}.`,
+        "warning"
+      );
+      return false;
+    }
+  }
+
+  item.cantidad += incremento;
   const carritoFinal = item.cantidad <= 0
     ? carrito.filter(p => p.id !== id)
     : carrito;
@@ -292,7 +319,8 @@ document.addEventListener("DOMContentLoaded", () => {
         card.innerHTML = `
           <div class="row align-items-center g-3">
             <div class="col-3 col-sm-2 text-center">
-              <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid rounded" style="max-height: 75px; object-fit: cover;">
+              <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid rounded" style="max-height: 75px; object-fit: cover;"
+                   onerror="this.onerror=null;this.src='${obtenerImagenPorDefecto()}'">
             </div>
             <div class="col-9 col-sm-5">
               <h5 class="fw-bold mb-1">${producto.nombre}</h5>

@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">Mil Sabores</a>
@@ -37,19 +35,18 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="carrito.html">
-              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito <span id="nav-carrito-contador" class="badge bg-secondary ms-1">0</span>
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcarrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.html">
-              <img src="user-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fuser-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
             </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
 
   <main class="container my-5 flex-grow-1">
     <nav aria-label="breadcrumb" class="mb-4">
@@ -60,25 +57,21 @@
       </ol>
     </nav>
 
-
     <div class="row g-5 mb-5 align-items-center">
       <div class="col-md-6 text-center">
         <div class="card border-0 shadow-sm p-4 bg-light">
-          <img id="img-producto" src="logo.jpeg" alt="Producto" class="img-fluid rounded" style="max-height: 380px; object-fit: contain;">
+          <img id="img-producto" src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Flogo.jpeg" alt="Producto" class="img-fluid rounded" style="max-height: 380px; object-fit: contain;">
         </div>
       </div>
-
 
       <div class="col-md-6">
         <span id="categoria-producto" class="badge bg-secondary mb-2">Categoría</span>
         <h1 id="nombre-producto" class="display-6 fw-bold mb-2">Cargando producto...</h1>
         <div class="h3 text-success fw-bold mb-4" id="precio-producto">$0</div>
 
-
         <p id="descripcion-producto" class="lead fs-6 text-muted mb-4">
           Descripción detallada del producto.
         </p>
-
 
         <div class="row align-items-center g-3 mb-4">
           <div class="col-auto">
@@ -88,7 +81,6 @@
             <input type="number" id="cantidad-producto" class="form-control text-center" value="1" min="1" max="50" style="width: 80px;">
           </div>
         </div>
-
 
         <div class="d-grid gap-2 d-md-flex">
           <button id="btn-agregar-detalle" class="btn btn-primary btn-lg px-4 fw-bold">
@@ -104,7 +96,6 @@
       </div>
     </div>
 
-
     <section class="mt-5 border-top pt-4">
       <h2 class="h4 fw-bold mb-4">Productos Relacionados</h2>
       <div id="grilla-relacionados" class="row row-cols-2 row-cols-md-4 g-3">
@@ -112,13 +103,11 @@
     </section>
   </main>
 
-
   <footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
       <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 — 50 Años Endulzando Momentos</p>
     </div>
   </footer>
-
 
   <!-- Scripts: datos -> carrito -> script de la página -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -127,4 +116,3 @@
   <script src="js/detalle.js"></script>
 </body>
 </html>
-

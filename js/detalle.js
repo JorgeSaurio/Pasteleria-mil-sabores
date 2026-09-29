@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (typeof CATALOGO_PRODUCTOS === "undefined") return;
-
+  if (typeof obtenerCatalogo !== "function") return;
 
   // Este módulo solo aplica en detalle-producto.html. Si el DOM de detalle no
   // está presente, se auto-inactiva para no tocar document.title en otra página.
   const nombre = document.getElementById("nombre-producto");
   if (!nombre) return;
 
+  const catalogo = obtenerCatalogo();
+  if (catalogo.length === 0) return;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const prodId = urlParams.get("id") || "TC001";
+  const prodId = urlParams.get("id");
 
-
-  const producto = CATALOGO_PRODUCTOS.find(p => p.id === prodId) || CATALOGO_PRODUCTOS[0];
-
+  const producto = obtenerProductoPorId(prodId) || catalogo[0];
+  const disponible = tieneStock(producto, 1);
 
   const breadcrumb = document.getElementById("breadcrumb-actual");
   const categoria = document.getElementById("categoria-producto");
@@ -21,10 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const descripcion = document.getElementById("descripcion-producto");
   const imagen = document.getElementById("img-producto");
 
-
   // Inyección de datos principales
   document.title = `Pastelería Mil Sabores | ${producto.nombre}`;
-
 
   if (breadcrumb) breadcrumb.textContent = producto.nombre;
   nombre.textContent = producto.nombre;
@@ -34,20 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (imagen) {
     imagen.src = producto.imagen;
     imagen.alt = producto.nombre;
+    imagen.onerror = function () {
+      this.onerror = null;
+      this.src = IMAGEN_POR_DEFECTO;
+    };
   }
-
 
   // Evento Añadir al Carrito
   const btnAgregar = document.getElementById("btn-agregar-detalle");
   const inputCantidad = document.getElementById("cantidad-producto");
   const alerta = document.getElementById("alerta-agregado");
 
-
   if (btnAgregar && inputCantidad) {
+    if (inputCantidad.max) inputCantidad.max = String(Math.max(1, producto.stock));
+    if (!disponible) {
+      btnAgregar.disabled = true;
+      btnAgregar.textContent = "Sin stock";
+    }
+
     btnAgregar.addEventListener("click", () => {
       const cant = parseInt(inputCantidad.value, 10) || 1;
       if (!window.agregarAlCarrito(producto.id, cant)) return;
-
 
       if (alerta) {
         alerta.classList.remove("d-none");
@@ -58,12 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   // Productos relacionados
   const contenedorRel = document.getElementById("grilla-relacionados");
   if (contenedorRel) {
-    const relacionados = CATALOGO_PRODUCTOS.filter(p => p.id !== producto.id).slice(0, 4);
-
+    const relacionados = catalogo
+      .filter(p => p.id !== producto.id && tieneStock(p, 1))
+      .slice(0, 4);
 
     relacionados.forEach(p => {
       const col = document.createElement("div");
@@ -85,6 +90,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-
-

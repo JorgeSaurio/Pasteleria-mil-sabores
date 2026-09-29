@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="index.html">Mil Sabores</a>
@@ -36,12 +35,12 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="carrito.html">
-              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito <span id="nav-carrito-contador" class="badge bg-secondary ms-1">0</span>
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcarrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.html">
-              <img src="user-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fuser-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
             </a>
           </li>
         </ul>
@@ -110,12 +109,13 @@
   <!-- Footer con clases utilitarias de Bootstrap -->
   <footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
-      <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 - 50 Años Endulzando Momentos</p>
+      <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 — 50 Años Endulzando Momentos</p>
     </div>
   </footer>
 
-  <!-- Scripts: carrito (esta vista no necesita el catálogo) -->
+  <!-- Scripts: datos (para validar stock) -> carrito -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/datos-catalogo.js"></script>
   <script src="js/carrito.js"></script>
 </body>
 </html>

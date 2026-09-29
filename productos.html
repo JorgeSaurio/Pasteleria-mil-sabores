@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">Mil Sabores</a>
@@ -37,12 +35,12 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="carrito.html">
-              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito <span id="nav-carrito-contador" class="badge bg-secondary ms-1">0</span>
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcarrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.html">
-              <img src="user-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fuser-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
             </a>
           </li>
         </ul>
@@ -50,42 +48,29 @@
     </div>
   </nav>
 
-
   <main class="container my-5 flex-grow-1">
     <header class="text-center mb-5">
       <h1 class="display-6 fw-bold">NUESTROS PRODUCTOS</h1>
       <p class="text-muted">Explora nuestras tortas tradicionales, postres artesanales y opciones especiales.</p>
     </header>
 
-
     <div class="row mb-4">
       <div class="col-md-6 mx-auto">
         <select id="filtro-categoria" class="form-select shadow-sm" aria-label="Filtrar por categoría">
           <option value="TODAS">Todas las categorías</option>
-          <option value="Tortas Cuadradas">Tortas Cuadradas</option>
-          <option value="Tortas Circulares">Tortas Circulares</option>
-          <option value="Postres Individuales">Postres Individuales</option>
-          <option value="Productos Sin Azúcar">Productos Sin Azúcar</option>
-          <option value="Pastelería Tradicional">Pastelería Tradicional</option>
-          <option value="Productos Sin Gluten">Productos Sin Gluten</option>
-          <option value="Productos Veganos">Productos Veganos</option>
-          <option value="Tortas Especiales">Tortas Especiales</option>
         </select>
       </div>
     </div>
 
-
     <div id="grilla-productos" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
     </div>
   </main>
-
 
   <footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
       <p class="mb-1">Pastelería 1000 Sabores &copy; 2026 — 50 Años Endulzando Momentos</p>
     </div>
   </footer>
-
 
   <!-- Scripts: datos -> carrito -> script de la página -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
