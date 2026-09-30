@@ -460,13 +460,13 @@ function enviarContacto() {
     const datos = Object.fromEntries(new FormData(formElement));
     datos.fecha = new Date().toISOString();
 
-    const contactos = JSON.parse(localStorage.getItem("Contactos")) || [];
+    const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
     contactos.push(datos);
     localStorage.setItem("contactos", JSON.stringify(contactos));
 
     mostrarMensaje("Comentario envíado correctamente.");
     formElement.reset();
-    input.forEach((i) => i.classList.remove("is-valid"));
+    inputs.forEach((i) => i.classList.remove("is-valid"));
 }
 
 
@@ -535,9 +535,10 @@ function iniciarSesion(){
         JSON.stringify({ run: usuario.run, name: usuario.name, email: usuario.email, tipo: usuario.tipo})
     );
 
-    mostrarMensaje("¡Bienvenido/a, ${usuario.name}!", "success");
-    setTimeout(() => {
-        window.location.href = "index.html";
+    mostrarMensaje(`¡Bienvenido/a, ${usuario.name}!`);
+    const destino = usuario.tipo === "Administrador" ? "/admin/admin-home.html" : "/index.html";
+    setTimeout(() => { window.location.href = destino; 
+        
     }, 1200);
 }
 
@@ -549,7 +550,7 @@ function mostrarMensaje(texto, tipo = "danger") {
 
     const alerta = document.createElement("div");
     alerta.id = "mensaje-formulario";
-    alerta.className = "alert alert-${tipo}";
+    alerta.className = `alert alert-${tipo}`;
     alerta.setAttribute("role", "alert");
     alerta.textContent = texto;
 
@@ -577,7 +578,7 @@ if (formElement){
                 })
             );
         });
-        const camposInvalidos = document.querySelectorAll(".is-invalid");
+        const camposInvalidos = formElement.querySelectorAll(".is-invalid");
         if (!formElement.checkValidity()){
             mostrarMensaje("Hay campos obligatorios sin completar");
             return;
