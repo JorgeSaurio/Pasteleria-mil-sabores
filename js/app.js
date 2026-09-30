@@ -1,7 +1,6 @@
 const MS_CANTIDAD_DESTACADOS = 8;
 const MS_RETARDO_ESQUELETO_MS = 350;
 
-
 /**
  * Inserta tarjetas de carga mientras se resuelve la grilla
  * @param {HTMLElement} contenedor
@@ -25,7 +24,6 @@ function renderizarEsqueletos(contenedor, cantidad) {
   `).join("");
 }
 
-
 /**
  * Renderiza el estado vacío cuando el catálogo no tiene destacados
  * @param {HTMLElement} contenedor
@@ -42,24 +40,24 @@ function renderizarVacio(contenedor) {
   `;
 }
 
-
 /**
  * Renderiza la grilla de destacados del home
  * @param {HTMLElement} contenedor
  */
 function renderizarDestacados(contenedor) {
-  if (typeof CATALOGO_PRODUCTOS === "undefined") {
+  if (typeof obtenerCatalogo !== "function") {
     console.error("app.js: falta js/datos-catalogo.js");
     return;
   }
 
+  const destacados = obtenerCatalogo()
+    .filter(p => tieneStock(p, 1))
+    .slice(0, MS_CANTIDAD_DESTACADOS);
 
-  const destacados = CATALOGO_PRODUCTOS.slice(0, MS_CANTIDAD_DESTACADOS);
   if (destacados.length === 0) {
     renderizarVacio(contenedor);
     return;
   }
-
 
   contenedor.innerHTML = destacados.map(p => `
     <div class="col">
@@ -87,28 +85,19 @@ function renderizarDestacados(contenedor) {
   `).join("");
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("grilla-destacados");
   if (!contenedor) return;
 
-
   renderizarEsqueletos(contenedor, MS_CANTIDAD_DESTACADOS);
   setTimeout(() => renderizarDestacados(contenedor), MS_RETARDO_ESQUELETO_MS);
-
 
   contenedor.addEventListener("click", (evento) => {
     const boton = evento.target.closest("button[data-agregar-id]");
     if (!boton || !contenedor.contains(boton)) return;
-
 
     if (window.agregarAlCarrito(boton.dataset.agregarId, 1)) {
       window.marcarBotonAgregado(boton);
     }
   });
 });
-
-
-
-
-
