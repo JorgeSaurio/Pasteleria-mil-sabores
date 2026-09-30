@@ -61,7 +61,7 @@
         Registro de usuario
     </h1>
 
-    <form id="signup-form">
+    <form id="signup-form" data-tipo="registro">
 
         <div class="mb-3">
 
@@ -180,7 +180,7 @@
                    class="form-control"
                    id="password"
                    name="password"
-                   placeholder="********"
+                   placeholder="****"
                    required>
         </div>
 
@@ -193,7 +193,7 @@
                    class="form-control"
                    id="password2"
                    name="password2"
-                   placeholder="********"
+                   placeholder="****"
                    required>
         </div>
 
@@ -209,6 +209,21 @@
                    placeholder="+56912345678"
                    pattern="(\+56)?9[0-9]{8}">
         </div>
+
+
+        <div class ="mb-3">
+            <label for="dir" class="form-label">
+              DIRECCIÓN
+            </label>
+            <input type="text"
+                    class="form-control"
+                    id="dir"
+                    name="dir"
+                    placeholder="Avenida Siempre Viva 123"
+                    required>
+        </div>
+
+
 
         <div class="d-grid">
             <button type="submit"
@@ -228,4 +243,33 @@
   <script src="js/validaciones.js"></script>
   <script src="js/region-comuna.js"></script>
 </body>
+<footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container">
+      <div class="row align-items-center gy-3">        
+        <div class="col-md-4 text-center text-md-start">
+          <span class="small d-block text-white mb-2">Medios de pago</span>
+          <div class="d-inline-flex align-items-center gap-2">
+            <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fvisa-icon.png " alt="Visa" class="img-fluid rounded border border-secondary" style="max-height: 26px;">
+            <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fpix-icon.png" alt="Pix" class="img-fluid rounded border border-secondary" style="max-height: 26px;">
+          </div>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <p class="mb-1 fw-semibold">Pastelería 1000 Sabores &copy; 2026 <br> 50 Años endulzando momentos</p>
+        </div>
+        
+        <div class="col-md-4 text-center text-md-end">
+          <span class="small d-block text-white mb-2">Síguenos en<br> nuestras RRSS</span>
+          <div class="d-inline-flex align-items-center gap-3">
+            <a href="https://www.instagram.com/chayanne/?hl=es-la" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Instagram">
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Finstagram-icon.png" alt="Instagram" width="28" height="28" class="img-fluid rounded">
+            </a>
+            <a href="https://www.facebook.com/CHAYANNE/?locale=es_LA" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Facebook">
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Ffacebook-icon.png" alt="Facebook" width="28" height="28" class="img-fluid rounded">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
