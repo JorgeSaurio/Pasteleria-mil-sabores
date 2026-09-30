@@ -6,7 +6,8 @@ if (document.getElementById("signup-form")?.dataset.tipo === "registro-admin") {
 }
 
 const formElement = document.getElementById("signup-form");
-const inputs = document.querySelectorAll("#signup-form input, #signup-form select, #signup-form textarea");
+const inputs = formElement ?
+                formElement.querySelectorAll("input, select, textarea") : [];
 
 
 
@@ -416,6 +417,35 @@ inputs.forEach((input) => {
 
 
 
+function mostrarUsuarios(){
+    const tabla = document.getElementById("tabla-usuarios");
+    if (!tabla) return;
+
+    const usuarios = Registrar();
+
+    if (usuarios.length === 0){
+        tabla.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No hay usuarios registrados.</td></tr>';
+        return;
+    }
+
+    usuarios.forEach((u) => {
+        const fila = document.createElement("tr");
+
+        [u.run,u.name,u.apellidos,u.email,u.tel,u.tipo || "Cliente"].forEach((dato) => {
+            const celda = document.createElement("td");
+            celda.textContent = dato || "-";
+            fila.appendChild(celda);
+        });
+        tabla.appendChild(fila);
+    });
+}
+
+mostrarUsuarios();
+
+
+
+
+
 function enviarContacto() {
     inputs.forEach((input) => {
         input.dispatchEvent(new Event("input", {bubbles: true}));
@@ -526,40 +556,41 @@ function mostrarMensaje(texto, tipo = "danger") {
     formElement.prepend(alerta);
     alerta.scrollIntoView({ behavior: "smooth", block: "center" });
 }
+if (formElement){
+    formElement.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-formElement.addEventListener("submit", (event) => {
-    event.preventDefault();
+        if (formElement.dataset.tipo === "login"){
+            iniciarSesion();
+            return;
+        }
 
-    if (formElement.dataset.tipo === "login"){
-        iniciarSesion();
-        return;
-    }
+        if (formElement.dataset.tipo === "contacto") {
+            enviarContacto();
+            return;
+        }
 
-    if (formElement.dataset.tipo === "contacto") {
-        enviarContacto();
-        return;
-    }
+        inputs.forEach((input) => {
+            input.dispatchEvent(
+                new Event("input", {
+                    bubbles: true
+                })
+            );
+        });
+        const camposInvalidos = document.querySelectorAll(".is-invalid");
+        if (!formElement.checkValidity()){
+            mostrarMensaje("Hay campos obligatorios sin completar");
+            return;
+        }
+        if (camposInvalidos.length > 0) {
+            mostrarMensaje("El formulario contiene errores.");
+            return;
+        }
 
-    inputs.forEach((input) => {
-        input.dispatchEvent(
-            new Event("input", {
-                bubbles: true
-            })
-        );
+        if (guardarRegistro()) {
+            mostrarMensaje("¡Registro exitoso!");
+            formElement.reset();
+            inputs.forEach((i) => i.classList.remove("is-valid"));
+        }
     });
-    const camposInvalidos = document.querySelectorAll(".is-invalid");
-    if (!formElement.checkValidity()){
-        mostrarMensaje("Hay campos obligatorios sin completar");
-        return;
-    }
-    if (camposInvalidos.length > 0) {
-        mostrarMensaje("El formulario contiene errores.");
-        return;
-    }
-
-    if (guardarRegistro()) {
-        mostrarMensaje("¡Registro exitoso!");
-        formElement.reset();
-        inputs.forEach((i) => i.classList.remove("is-valid"));
-    }
-    });
+}
