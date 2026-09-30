@@ -2,7 +2,7 @@
 
 
 :root {
-  /* Paleta Oficial Forma C */
+  /* Paleta colores*/
   --color-fondo: #FFF5E1;
   --color-rosa: #FFC0CB;
   --color-chocolate: #8B4513;
@@ -25,7 +25,7 @@ body {
 }
 
 
-/* --- Barra de Navegación --- */
+/* navbar*/
 .navbar-icon {
   vertical-align: middle;
   margin-right: 6px;
@@ -45,7 +45,7 @@ body {
 }
 
 
-/* --- Contador del Carrito (carrito.js) --- */
+/*Contador del carrito.js */
 .ms-carrito-contador {
   display: inline-flex;
   align-items: center;
@@ -63,7 +63,7 @@ body {
 }
 
 
-/* --- Secciones Destacadas --- */
+/* secciones*/
 .hero-section {
   background: linear-gradient(180deg, var(--color-fondo) 0%, #ffffff 100%);
   border-bottom: 1px solid #f6e6d4;
@@ -76,7 +76,7 @@ body {
 }
 
 
-/* --- Botón de Marca Dinámico (Compatible con carrito.js) --- */
+/* boton contador de productos */
 .btn-anadir {
   background-color: var(--color-chocolate);
   border-color: var(--color-chocolate);
@@ -111,7 +111,7 @@ body {
 }
 
 
-/* Estado de confirmación al presionar "Añadir" en JS */
+/* confirmacipn */
 .btn-anadir.is-added,
 .btn-anadir.is-added:hover,
 .btn-anadir.is-added:focus {
@@ -127,7 +127,6 @@ body {
 }
 
 
-/* --- Tarjetas de Producto --- */
 .product-card {
   border-radius: 14px;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
@@ -152,7 +151,6 @@ body {
 }
 
 
-/* --- Efecto Skeleton Loading (app.js) --- */
 .ms-esqueleto {
   background: linear-gradient(100deg, #eee6dd 30%, #f8f2ea 50%, #eee6dd 70%);
   background-size: 220% 100%;
@@ -185,7 +183,7 @@ body {
 }
 
 
-/* --- Toasts y Notificaciones Emergentes (carrito.js) --- */
+/* toasts */
 .ms-notificaciones {
   position: fixed;
   right: 1rem;

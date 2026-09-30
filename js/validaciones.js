@@ -1,7 +1,7 @@
 if (document.getElementById("signup-form")?.dataset.tipo === "registro-admin") {
     const sesion = JSON.parse(sessionStorage.getItem("usuarioActivo"));
     if (!sesion || sesion.tipo !== "Administrador") {
-        window.location.href = "login.html";
+        window.location.href = "admin-form-usuario.html";
     }
 }
 
