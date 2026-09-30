@@ -1,5 +1,12 @@
+if (document.getElementById("signup-form")?.dataset.tipo === "registro-admin") {
+    const sesion = JSON.parse(sessionStorage.getItem("usuarioActivo"));
+    if (!sesion || sesion.tipo !== "Administrador") {
+        window.location.href = "login.html";
+    }
+}
+
 const formElement = document.getElementById("signup-form");
-const inputs = document.querySelectorAll("#signup-form input");
+const inputs = document.querySelectorAll("#signup-form input, #signup-form select, #signup-form textarea");
 
 
 
@@ -304,6 +311,94 @@ inputs.forEach((input) => {
                 input.classList.add("is-valid"); 
                 mensajeError.textContent = ""; 
                 break;
+
+            case "tipo":
+                if (value === "") {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "SELECCIONA UN TIPO DE USUARIO";
+                    return;
+                }
+                mensajeError.textContent = "";
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+                break;
+            
+
+
+
+            case "nombrecontacto": {
+                if (value.trim().length === 0) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL NOMBRE ES OBLIGATORIO";
+                    return;
+                }
+
+                if (value.length > 100) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL NOMBRE NO DEBE SUPERAR LOS 100 CARACTERES";
+                    return;
+                }
+
+                mensajeError.textContent = "";
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+                break;
+            }
+
+            case "correocontacto": {
+                const regexCorreoContacto =
+                    /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
+
+                if (value.length === 0) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL CORREO NO PUEDE ESTAR VACÍO";
+                    return;
+                }
+
+                if (value.length > 100) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL CORREO NO DEBE SUPERAR LOS 100 CARACTERES";
+                    return;
+                }
+
+                if (!regexCorreoContacto.test(value)) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "SOLO SE PERMITEN CORREOS @duoc.cl, @profesor.duoc.cl y @gmail.com.";
+                    return;
+                }
+
+                mensajeError.textContent = "";
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+                break;
+            }
+
+            case "comentariocontacto": {
+                if (value.trim().length === 0) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL COMENTARIO ES OBLIGATORIO";
+                    return;
+                }
+
+                if (value.length > 500) {
+                    input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    mensajeError.textContent = "EL COMENTARIO NO DEBE SUPERAR LOS 500 CARACTERES";
+                    return;
+                }
+
+                mensajeError.textContent = "";
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+                break;
+            }
             default:
                 break;
         }
@@ -320,8 +415,49 @@ inputs.forEach((input) => {
 
 
 
+
+function enviarContacto() {
+    inputs.forEach((input) => {
+        input.dispatchEvent(new Event("input", {bubbles: true}));
+
+    });
+
+    if (formElement.querySelectorAll(".is-invalid").length > 0){
+        mostrarMensaje("El formulario tiene errores.");
+        return;
+    }
+
+    const datos = Object.fromEntries(new FormData(formElement));
+    datos.fecha = new Date().toISOString();
+
+    const contactos = JSON.parse(localStorage.getItem("Contactos")) || [];
+    contactos.push(datos);
+    localStorage.setItem("contactos", JSON.stringify(contactos));
+
+    mostrarMensaje("Comentario envíado correctamente.");
+    formElement.reset();
+    input.forEach((i) => i.classList.remove("is-valid"));
+}
+
+
+
 function Registrar(){
-    return JSON.parse(localStorage.getItem("registros")) || [];
+    const lista = JSON.parse(localStorage.getItem("registros")) || [];
+    return lista.map((u) => ({ ...u, tipo: u.tipo || "Cliente" }));
+}
+
+if (!Registrar().some((u) => u.tipo === "Administrador")) {
+    const lista = Registrar();
+    lista.push({
+        run: "173743882",
+        name: "Jorge",
+        apellidos: "Soto",
+        email: "jorgesoto@gmail.com",
+        dir: "Sin dirección",
+        password: "admin1",
+        tipo: "Administrador"
+    });
+    localStorage.setItem("registros", JSON.stringify(lista));
 }
 
 function guardarRegistro(){
@@ -333,6 +469,13 @@ function guardarRegistro(){
         return false;
 
     }
+    if (registros.some((r) => r.email.toLowerCase() === datos.email.toLowerCase())) {
+        mostrarMensaje("Ya existe un usuario con ese correo.");
+        return false;
+    }
+
+    const esAdmin = formElement.dataset.tipo === "registro-admin";
+    datos.tipo = esAdmin ? datos.tipo : "Cliente";
 
     registros.push(datos);
     localStorage.setItem("registros", JSON.stringify(registros));
@@ -359,10 +502,10 @@ function iniciarSesion(){
 
     sessionStorage.setItem(
         "usuarioActivo",
-        JSON.stringify({ run: usuario.run, name: usuario.name, email: usuario.email})
+        JSON.stringify({ run: usuario.run, name: usuario.name, email: usuario.email, tipo: usuario.tipo})
     );
 
-    mostrarMensaje(`¡Bienvenido/a, ${usuario.name}!`, "success");
+    mostrarMensaje("¡Bienvenido/a, ${usuario.name}!", "success");
     setTimeout(() => {
         window.location.href = "index.html";
     }, 1200);
@@ -376,7 +519,7 @@ function mostrarMensaje(texto, tipo = "danger") {
 
     const alerta = document.createElement("div");
     alerta.id = "mensaje-formulario";
-    alerta.className = `alert alert-${tipo}`;
+    alerta.className = "alert alert-${tipo}";
     alerta.setAttribute("role", "alert");
     alerta.textContent = texto;
 
@@ -389,6 +532,11 @@ formElement.addEventListener("submit", (event) => {
 
     if (formElement.dataset.tipo === "login"){
         iniciarSesion();
+        return;
+    }
+
+    if (formElement.dataset.tipo === "contacto") {
+        enviarContacto();
         return;
     }
 

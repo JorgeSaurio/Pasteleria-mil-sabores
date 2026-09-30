@@ -3,39 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pastelería Mil Sabores | Editar Usuario</title>
+  <title>Pastelería Mil Sabores | Registro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="admin-home.html">Mil Sabores | Admin</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="index.html">Mil Sabores</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarAdmin">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="admin-home.html">Home Admin</a>
+            <a class="nav-link" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin-productos.html">Productos</a>
+            <a class="nav-link" href="productos.html">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin-usuarios.html">Usuarios</a>
+            <a class="nav-link" href="nosotros.html">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contacto</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="../index.html">Volver a la tienda</a>
+            <a class="nav-link" href="carrito.html">
+              <img src="carrito-de-compras.png" alt="Carrito de compras" width="28" height="28" class="navbar-icon"> Carrito
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="login.html">
+              <img src="user-interface.png" alt="Iniciar sesión" width="28" height="28" class="navbar-icon"> Iniciar sesión
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Mantenedor usuarios - editar -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+<!-- Registro de usuario -->
+
+<div class="container my-5">
+
+    <h1 class="text-center mb-4">
+        Registro de usuario
+    </h1>
+
+    <form id="signup-form" data-tipo="registro-admin">
+
+        <div class="mb-3">
+
+            <label for="run" class="form-label">
+                RUN
+            </label>
+
+            <input type="text"
+                   class="form-control"
+                   id="run"
+                   name="run"
+                   placeholder="21.088.533-1"
+                   required>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">
+                NOMBRE
+            </label>
+
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   placeholder="John"
+                   required>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="apellidos" class="form-label">
+            APELLIDOS
+          </label>
+            <input type="text"
+                   class="form-control"
+                   id="apellidos"
+                   name="apellidos"
+                   placeholder="Doe Salinas"
+                   required>
+          
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">
+                CORREO
+            </label>
+
+            <input type="email"
+                   class="form-control"
+                   id="email"
+                   name="email"
+                   placeholder="LoremIpsum@duocuc.cl"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email2" class="form-label">
+                CONFIRMAR CORREO
+            </label>
+
+            <input type="email"
+                   class="form-control"
+                   id="email2"
+                   name="email2"
+                   placeholder="LoremIpsum@duocuc.cl"
+                   required>
+        </div>
+
+
+
+        <div class="mb-3">
+          <label for="nacimiento" class="form-label">
+            FECHA NACIMIENTO
+          </label>
+
+          <input type="date" 
+                  id="nacimiento"
+                  name="nacimiento">
+
+        </div>
+
+        <div class="mb-3">
+            <label for="tipo" class="form-label">TIPO DE USUARIO</label>
+            <select class="form-select" id="tipo" name="tipo" required>
+                <option value="" selected disabled>Selecciona un perfil</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Cliente">Cliente</option>
+                <option value="Vendedor">Vendedor</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="region" class="form-label">
+            REGIÓN
+          </label>
+
+          <select id="region" name="region" class="form-select" required>
+            <option value="">
+              SELECCIONA UNA REGIÓN
+            </option>
+          </select>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="comuna" class="form-label">
+            COMUNA
+          </label>
+
+          <select id="comuna" name="comuna" class="form-select" required disabled>
+            <option  value="">
+              Selecciona una región
+            </option>
+          </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                CONTRASEÑA
+            </label>
+
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   name="password"
+                   placeholder="****"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password2" class="form-label">
+                CONFIRMAR CONTRASEÑA
+            </label>
+
+            <input type="password"
+                   class="form-control"
+                   id="password2"
+                   name="password2"
+                   placeholder="****"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label for="tel" class="form-label">
+                TELÉFONO (opcional)
+            </label>
+
+            <input type="tel"
+                   class="form-control"
+                   id="tel"
+                   name="tel"
+                   placeholder="+56912345678"
+                   pattern="(\+56)?9[0-9]{8}">
+        </div>
+
+
+        <div class ="mb-3">
+            <label for="dir" class="form-label">
+              DIRECCIÓN
+            </label>
+            <input type="text"
+                    class="form-control"
+                    id="dir"
+                    name="dir"
+                    placeholder="Avenida Siempre Viva 123"
+                    required>
+        </div>
+
+
+
+        <div class="d-grid">
+            <button type="submit"
+                    class="btn btn-outline-dark">
+                REGISTRAR
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  <script src="js/validaciones.js"></script>
+  <script src="js/region-comuna.js"></script>
 </body>
+<footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container">
+      <div class="row align-items-center gy-3">        
+        <div class="col-md-4 text-center text-md-start">
+          <span class="small d-block text-white mb-2">Medios de pago</span>
+          <div class="d-inline-flex align-items-center gap-2">
+            <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fvisa-icon.png " alt="Visa" class="img-fluid rounded border border-secondary" style="max-height: 26px;">
+            <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fpix-icon.png" alt="Pix" class="img-fluid rounded border border-secondary" style="max-height: 26px;">
+          </div>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <p class="mb-1 fw-semibold">Pastelería 1000 Sabores &copy; 2026 <br> 50 Años endulzando momentos</p>
+        </div>
+        
+        <div class="col-md-4 text-center text-md-end">
+          <span class="small d-block text-white mb-2">Síguenos en<br> nuestras RRSS</span>
+          <div class="d-inline-flex align-items-center gap-3">
+            <a href="https://www.instagram.com/chayanne/?hl=es-la" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Instagram">
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Finstagram-icon.png" alt="Instagram" width="28" height="28" class="img-fluid rounded">
+            </a>
+            <a href="https://www.facebook.com/CHAYANNE/?locale=es_LA" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Facebook">
+              <img src="https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Ffacebook-icon.png" alt="Facebook" width="28" height="28" class="img-fluid rounded">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
