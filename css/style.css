@@ -1,11 +1,237 @@
-/* Pastelería Mil Sabores - hoja de estilos */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap');
 
+
+:root {
+  /* Paleta colores*/
+  --color-fondo: #FFF5E1;
+  --color-rosa: #FFC0CB;
+  --color-chocolate: #8B4513;
+  --color-chocolate-hover: #6f3610;
+  --color-texto: #5D4037;
+  --color-texto-secundario: #9c8b83;
+}
+
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--color-texto);
+}
+
+
+.font-titulo {
+  font-family: 'Pacifico', cursive;
+  color: var(--color-chocolate);
+  letter-spacing: -0.01em;
+}
+
+
+/* navbar*/
 .navbar-icon {
   vertical-align: middle;
   margin-right: 6px;
 }
 
+
 .nav-link {
   display: flex;
   align-items: center;
 }
+
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-chocolate);
+}
+
+
+/*Contador del carrito.js */
+.ms-carrito-contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 0.35rem;
+  margin-left: 4px;
+  border-radius: 999px;
+  background-color: var(--color-chocolate);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+
+/* secciones*/
+.hero-section {
+  background: linear-gradient(180deg, var(--color-fondo) 0%, #ffffff 100%);
+  border-bottom: 1px solid #f6e6d4;
+}
+
+
+.bg-comunidad {
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-fondo) 100%);
+  border-top: 1px solid #f6e6d4;
+}
+
+
+/* boton contador de productos */
+.btn-anadir {
+  background-color: var(--color-chocolate);
+  border-color: var(--color-chocolate);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 999px;
+  padding-inline: 1.35rem;
+  box-shadow: 0 2px 6px rgba(139, 69, 19, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+
+.btn-anadir:hover:not(:disabled),
+.btn-anadir:focus-visible {
+  background-color: var(--color-chocolate-hover);
+  border-color: var(--color-chocolate-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.26);
+}
+
+
+.btn-anadir:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+.btn-anadir:disabled {
+  background-color: #d9b7a6;
+  border-color: #d9b7a6;
+  color: #ffffff;
+}
+
+
+/* confirmacipn */
+.btn-anadir.is-added,
+.btn-anadir.is-added:hover,
+.btn-anadir.is-added:focus {
+  background-color: #2f7d4f !important;
+  border-color: #2f7d4f !important;
+  color: #ffffff !important;
+}
+
+
+.btn-anadir .ms-check {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+
+.product-card {
+  border-radius: 14px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  overflow: hidden;
+}
+
+
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(93, 64, 55, 0.16) !important;
+}
+
+
+.product-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+
+.product-card:hover .card-img-top {
+  transform: scale(1.04);
+}
+
+
+.ms-esqueleto {
+  background: linear-gradient(100deg, #eee6dd 30%, #f8f2ea 50%, #eee6dd 70%);
+  background-size: 220% 100%;
+  animation: ms-brillo 1.3s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+
+.ms-esqueleto--img {
+  height: 160px;
+  border-radius: 0;
+}
+
+
+.ms-esqueleto--linea {
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+
+.ms-esqueleto--ancho-75 { width: 75%; }
+.ms-esqueleto--ancho-50 { width: 50%; }
+.ms-esqueleto--precio { width: 40%; height: 20px; }
+.ms-esqueleto--boton { width: 76px; height: 31px; border-radius: 999px; }
+
+
+@keyframes ms-brillo {
+  from { background-position: 180% 0; }
+  to { background-position: -20% 0; }
+}
+
+
+/* toasts */
+.ms-notificaciones {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1080;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+
+.ms-notificacion {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  box-shadow: 0 8px 20px rgba(62, 36, 24, 0.24);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+
+.ms-notificacion.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.ms-notificacion--success { background: #2f7d4f; }
+.ms-notificacion--info    { background: #2c6e8f; }
+.ms-notificacion--warning { background: #a8730f; }
+.ms-notificacion--danger  { background: #a53434; }
+
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .btn-anadir,
+  .product-card,
+  .product-card .card-img-top,
+  .ms-notificacion,
+  .ms-esqueleto {
+    transition: none;
+    animation: none;
+    transform: none;
+  }
+}
+
