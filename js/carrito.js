@@ -92,6 +92,7 @@ function actualizarContadorNav() {
   if (!contador) return;
   const totalItems = obtenerCarritoSeguro().reduce((acum, item) => acum + item.cantidad, 0);
   contador.textContent = String(totalItems);
+  contador.classList.toggle("d-none", totalItems === 0);
 }
 
 /** Refresca la vista de carrito.html si estamos en esa pantalla */

@@ -322,6 +322,7 @@ function eliminarProducto(id) {
  * Conserva la opción placeholder (value="") si el select ya tiene una.
  * @param {HTMLSelectElement} select
  * @param {{todas?: string}} [opciones] "todas" agrega una opción general al inicio
+ *   y la deja seleccionada por defecto
  */
 function poblarSelectCategorias(select, opciones = {}) {
   if (!select) return;
@@ -345,6 +346,7 @@ function poblarSelectCategorias(select, opciones = {}) {
     option.textContent = opciones.todas;
     option.dataset.msGenerada = "true";
     select.prepend(option);
+    select.value = "TODAS";
   }
 
   if (placeholder) select.prepend(placeholder);

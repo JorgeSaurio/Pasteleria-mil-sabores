@@ -45,6 +45,24 @@ body {
 }
 
 
+/* --- Contador del Carrito (carrito.js) --- */
+.ms-carrito-contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 0.35rem;
+  margin-left: 4px;
+  border-radius: 999px;
+  background-color: var(--color-chocolate);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+
 /* --- Secciones Destacadas --- */
 .hero-section {
   background: linear-gradient(180deg, var(--color-fondo) 0%, #ffffff 100%);
@@ -204,17 +222,6 @@ body {
 .ms-notificacion--info    { background: #2c6e8f; }
 .ms-notificacion--warning { background: #a8730f; }
 .ms-notificacion--danger  { background: #a53434; }
-
-
-/* --- Panel de Administración (Tablas y Badges) --- */
-.table-admin thead {
-  background-color: var(--color-texto);
-  color: #ffffff;
-}
-
-
-.badge-stock-critico { background-color: #dc3545; }
-.badge-stock-ok      { background-color: #198754; }
 
 
 /* Accesibilidad */
