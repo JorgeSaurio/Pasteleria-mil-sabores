@@ -21,7 +21,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Cuadradas",
     nombre: "Torta Cuadrada de Chocolate",
     precio: 45000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-cuadrada-chocolate.png",
     descripcion: "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales."
   },
   {
@@ -29,7 +29,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Cuadradas",
     nombre: "Torta Cuadrada de Frutas",
     precio: 50000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-cuadrada-frutas.jpg",
     descripcion: "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones."
   },
   {
@@ -37,7 +37,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Circulares",
     nombre: "Torta Circular de Vainilla",
     precio: 40000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-circular-vainilla.jpg",
     descripcion: "Bizcocho de vainilla clásico relleno con crema pastelera y cubierto con un glaseado dulce, perfecto para cualquier ocasión."
   },
   {
@@ -45,7 +45,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Circulares",
     nombre: "Torta Circular de Manjar",
     precio: 42000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-circular-manjar.webp",
     descripcion: "Torta tradicional chilena con manjar y nueces, un deleite para los amantes de los sabores dulces y clásicos."
   },
   {
@@ -53,7 +53,7 @@ const CATALOGO_INICIAL = [
     categoria: "Postres Individuales",
     nombre: "Mousse de Chocolate",
     precio: 5000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fmousse-chocolate.webp",
     descripcion: "Postre individual cremoso y suave, hecho con chocolate de alta calidad, ideal para los amantes del chocolate."
   },
   {
@@ -61,7 +61,7 @@ const CATALOGO_INICIAL = [
     categoria: "Postres Individuales",
     nombre: "Tiramisú Clásico",
     precio: 5500,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftiramisu.jfif",
     descripcion: "Un postre italiano individual con capas de café, mascarpone y cacao, perfecto para finalizar cualquier comida."
   },
   {
@@ -69,7 +69,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Sin Azúcar",
     nombre: "Torta Sin Azúcar de Naranja",
     precio: 48000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-naranja.jpg",
     descripcion: "Torta ligera y deliciosa, endulzada naturalmente, ideal para quienes buscan opciones más saludables."
   },
   {
@@ -77,7 +77,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Sin Azúcar",
     nombre: "Cheesecake Sin Azúcar",
     precio: 47000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fcheescake-sin-azucar.jpg",
     descripcion: "Suave y cremoso, este cheesecake es una opción perfecta para disfrutar sin culpa."
   },
   {
@@ -85,7 +85,7 @@ const CATALOGO_INICIAL = [
     categoria: "Pastelería Tradicional",
     nombre: "Empanada de Manzana",
     precio: 3000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fempanadas-manzana.jpg",
     descripcion: "Pastelería tradicional rellena de manzanas especiadas, perfecta para un dulce desayuno o merienda."
   },
   {
@@ -93,7 +93,7 @@ const CATALOGO_INICIAL = [
     categoria: "Pastelería Tradicional",
     nombre: "Tarta de Santiago",
     precio: 6000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftarta-de-santiago.jpg",
     descripcion: "Tradicional tarta española hecha con almendras, azúcar y huevos, una delicia para los amantes de los postres clásicos."
   },
   {
@@ -101,7 +101,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Sin Gluten",
     nombre: "Brownie Sin Gluten",
     precio: 4000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fbrownie-sin-gluten.jpg",
     descripcion: "Rico y denso, este brownie es perfecto para quienes necesitan evitar el gluten sin sacrificar el sabor."
   },
   {
@@ -109,7 +109,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Sin Gluten",
     nombre: "Pan Sin Gluten",
     precio: 3500,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fpan-sin-gluten.jpg",
     descripcion: "Suave y esponjoso, ideal para sandwiches o para acompañar cualquier comida."
   },
   {
@@ -117,7 +117,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Veganos",
     nombre: "Torta Vegana de Chocolate",
     precio: 50000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-vegana-chocolate.webp",
     descripcion: "Torta de chocolate húmeda y deliciosa, hecha sin productos de origen animal, perfecto para veganos."
   },
   {
@@ -125,7 +125,7 @@ const CATALOGO_INICIAL = [
     categoria: "Productos Veganos",
     nombre: "Galletas Veganas de Avena",
     precio: 4500,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Fgalletas-veganas-avena.jpg",
     descripcion: "Crujientes y sabrosas, estas galletas son una excelente opción para un snack saludable y vegano."
   },
   {
@@ -133,7 +133,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Especiales",
     nombre: "Torta Especial de Cumpleaños",
     precio: 55000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-cumpleanios.jpg",
     descripcion: "Diseñada especialmente para celebraciones, personalizable con decoraciones y mensajes únicos."
   },
   {
@@ -141,7 +141,7 @@ const CATALOGO_INICIAL = [
     categoria: "Tortas Especiales",
     nombre: "Torta Especial de Boda",
     precio: 60000,
-    imagen: IMAGEN_POR_DEFECTO,
+    imagen: "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2Ftorta-boda.jpg",
     descripcion: "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda."
   }
 ];
