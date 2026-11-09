@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+
+:root {
+  --color-texto: #5D4037;
+}
+
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--color-texto);
+}
+
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+
+.table-admin thead {
+  background-color: var(--color-texto);
+  color: #ffffff;
+}
+
+
+.badge-stock-critico { background-color: #dc3545; }
+.badge-stock-ok      { background-color: #198754; }
