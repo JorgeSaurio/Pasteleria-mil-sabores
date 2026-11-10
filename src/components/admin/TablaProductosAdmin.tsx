@@ -7,14 +7,9 @@ import { formatearMoneda } from '@/utils/formato';
 interface TablaProductosAdminProps {
   productos: Producto[];
   categorias: Categoria[];
-  /** Si no se pasa, la columna de acciones solo muestra "Editar". */
   onEliminar?: (producto: Producto) => void;
 }
 
-/**
- * Tabla de inventario. La reutilizan "Productos" y "Stock crítico":
- * misma presentación, distinta fuente de datos (la decide la página).
- */
 export function TablaProductosAdmin({ productos, categorias, onEliminar }: TablaProductosAdminProps) {
   const nombreCategoria = new Map(categorias.map((c) => [c.id, c.nombre]));
 

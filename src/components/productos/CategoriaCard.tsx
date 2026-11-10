@@ -7,7 +7,6 @@ interface CategoriaCardProps {
   activa: boolean;
 }
 
-/** Tarjeta de la vista Categorías (Figura 4). Navega por URL para que el enlace sea compartible. */
 export function CategoriaCard({ categoria, activa }: CategoriaCardProps) {
   return (
     <Link

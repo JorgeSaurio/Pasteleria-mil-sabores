@@ -1,12 +1,3 @@
-/**
- * FÁBRICA DE REPOSITORIOS: único punto desde donde la UI obtiene datos.
- *
- *   import { productoRepositorio } from '@/services';
- *
- * Ningún componente importa desde services/local/ ni services/http/ directamente.
- * Para conectar el backend: crear services/http/<entidad>Http.ts que cumpla el mismo
- * contrato y cambiar la línea correspondiente abajo (se puede migrar entidad por entidad).
- */
 import { entorno } from '@/config/entorno';
 import type { AuthRepositorio } from './contratos/AuthRepositorio';
 import type { CarritoRepositorio } from './contratos/CarritoRepositorio';
@@ -31,7 +22,7 @@ if (entorno.modoDatos === 'http') {
   );
 }
 
-// Ejemplo futuro:  entorno.modoDatos === 'http' ? productoHttp : productoLocal
+// Único punto para obtener datos.
 export const productoRepositorio: ProductoRepositorio = productoLocal;
 export const categoriaRepositorio: CategoriaRepositorio = categoriaLocal;
 export const usuarioRepositorio: UsuarioRepositorio = usuarioLocal;

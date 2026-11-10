@@ -4,7 +4,6 @@ import type { Orden } from '@/types';
 import { DetalleOrdenCliente } from './DetalleOrdenCliente';
 
 test('debería mostrar el encabezado recibido, el descuento con su cupón y el total de la orden', () => {
-  // Arrange
   const orden: Orden = {
     id: 'o1',
     numero: 1001,
@@ -20,10 +19,8 @@ test('debería mostrar el encabezado recibido, el descuento con su cupón y el t
     estado: 'pagada',
   };
 
-  // Act
   render(<DetalleOrdenCliente orden={orden} encabezado={<h1>Compra exitosa</h1>} etiquetaTotal="Total pagado" />);
 
-  // Assert
   expect(screen.getByRole('heading', { name: 'Compra exitosa' })).toBeInTheDocument();
   expect(screen.getByText('Descuento FELICES50: -$4.500')).toBeInTheDocument();
   expect(screen.getByText('Total pagado: $40.500')).toBeInTheDocument();

@@ -9,12 +9,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { mensajeDeError, pagoRepositorio } from '@/services';
 import { formatearMoneda } from '@/utils/formato';
 
-/**
- * Checkout (nuevo, Figura 6). Envía una SolicitudPago con ítems + cupón + datos,
- * SIN montos: el total que vale es el que devuelve la orden, no el de la pantalla.
- * El carrito se vacía en la página de éxito, no aquí: si se vaciara antes de navegar,
- * la redirección "carrito vacío" de esta misma página podría ganarle a la navegación.
- */
 export function CheckoutPage() {
   const carrito = useCarrito();
   const { usuario, estado } = useAuth();
@@ -73,7 +67,6 @@ export function CheckoutPage() {
         )}
 
         <FormularioCheckout
-          // key: si la sesión aparece después, el formulario se remonta con los datos precargados.
           key={usuario?.run ?? 'anonimo'}
           valoresIniciales={
             usuario

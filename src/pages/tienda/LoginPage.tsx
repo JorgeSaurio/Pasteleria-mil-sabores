@@ -8,7 +8,6 @@ import { useFormulario } from '@/hooks/useFormulario';
 import { useNotificacion } from '@/hooks/useNotificacion';
 import { requerido } from '@/utils/validaciones';
 
-/** Inicio de sesión. Redirige a la página que pidió login, o según el rol. */
 export function LoginPage() {
   const { usuario, iniciarSesion, cerrarSesion } = useAuth();
   const { notificar } = useNotificacion();
@@ -34,8 +33,6 @@ export function LoginPage() {
     navigate(desde ?? (esPersonal ? '/admin' : '/'), { replace: true });
   });
 
-  // Ya hay sesión: no se muestra el formulario (sin redirigir automáticamente para no
-  // competir con la navegación que hace el propio login al completarse).
   if (usuario && !enviando) {
     return (
       <div className="container my-5" style={{ maxWidth: 520 }}>

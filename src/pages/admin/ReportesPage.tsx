@@ -6,10 +6,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { categoriaRepositorio, ordenRepositorio, productoRepositorio } from '@/services';
 import { formatearMoneda } from '@/utils/formato';
 
-/**
- * Reportes (nuevo). Indicadores calculados en el frontend a partir de las órdenes.
- * Con backend, estos cálculos deberían venir agregados desde un endpoint de reportes.
- */
 export function ReportesPage() {
   const { datos, cargando, error } = useAsync(async () => {
     const [ordenes, productos, categorias] = await Promise.all([

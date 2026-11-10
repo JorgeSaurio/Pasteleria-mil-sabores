@@ -7,20 +7,12 @@ const CANTIDAD_MAXIMA_ITEM = 50;
 const DURACION_ESTADO_BOTON_MS = 1500;
 const DURACION_NOTIFICACION_MS = 2600;
 
-/**
- * Resuelve la imagen de respaldo sin depender de que el catálogo esté cargado
- * @returns {string}
- */
 function obtenerImagenPorDefecto() {
   return typeof IMAGEN_POR_DEFECTO !== "undefined"
     ? IMAGEN_POR_DEFECTO
     : "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Flogo.jpeg";
 }
 
-/**
- * Valida y normaliza un item del carrito
- * @returns {object|null} Item válido o null si el registro está corrupto
- */
 function normalizarItemCarrito(item) {
   if (!item || typeof item !== "object") return null;
 
@@ -45,10 +37,6 @@ function normalizarItemCarrito(item) {
   };
 }
 
-/**
- * Lee el carrito desde localStorage descartando registros corruptos
- * @returns {Array<object>}
- */
 function obtenerCarritoSeguro() {
   try {
     const data = localStorage.getItem(CLAVE_CARRITO);
@@ -65,10 +53,6 @@ function obtenerCarritoSeguro() {
   }
 }
 
-/**
- * Guarda el carrito normalizado
- * @param {Array<object>} carrito
- */
 function guardarCarrito(carrito) {
   try {
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
@@ -79,10 +63,6 @@ function guardarCarrito(carrito) {
 }
 
 
-/**
- * @param {number} monto
- * @returns {string} Monto formateado como pesos chilenos
- */
 function formatearMoneda(monto) {
   return "$" + Number(monto || 0).toLocaleString("es-CL");
 }
@@ -95,7 +75,6 @@ function actualizarContadorNav() {
   contador.classList.toggle("d-none", totalItems === 0);
 }
 
-/** Refresca la vista de carrito.html si estamos en esa pantalla */
 function refrescarVistaCarrito() {
   if (typeof window.renderizarVistaCarrito === "function") {
     window.renderizarVistaCarrito();
@@ -106,12 +85,6 @@ function refrescarVistaCarrito() {
 window.formatearMoneda = formatearMoneda;
 window.obtenerCarritoSeguro = obtenerCarritoSeguro;
 
-/**
- * Agrega un producto del catálogo al carrito
- * @param {string} idProducto
- * @param {number} cantidad
- * @returns {boolean} true si el producto se agregó o se acumuló
- */
 window.agregarAlCarrito = function (idProducto, cantidad = 1) {
   if (typeof obtenerProductoPorId !== "function") {
     console.error("agregarAlCarrito: falta js/datos-catalogo.js en esta página");
@@ -167,12 +140,6 @@ window.agregarAlCarrito = function (idProducto, cantidad = 1) {
   return true;
 };
 
-/**
- * Suma o resta unidades de un item. Si la cantidad llega a 0, lo elimina.
- * @param {string} id
- * @param {number} delta
- * @returns {boolean}
- */
 window.modificarCantidad = function (id, delta) {
   const carrito = obtenerCarritoSeguro();
   const item = carrito.find(p => p.id === id);
@@ -232,11 +199,6 @@ function obtenerHostNotificaciones() {
   return host;
 }
 
-/**
- * Muestra un aviso efímero en la esquina inferior derecha
- * @param {string} mensaje
- * @param {"success"|"warning"|"danger"|"info"} variante
- */
 window.mostrarNotificacion = function (mensaje, variante = "success") {
   if (!mensaje) return;
 
@@ -253,11 +215,6 @@ window.mostrarNotificacion = function (mensaje, variante = "success") {
   }, DURACION_NOTIFICACION_MS);
 };
 
-/**
- * Bloquea el botón y muestra confirmación temporal
- * @param {HTMLElement} boton
- * @returns {boolean} false si el botón ya estaba bloqueado
- */
 window.marcarBotonAgregado = function (boton) {
   if (!boton || boton.dataset.msBloqueado === "1") return false;
 

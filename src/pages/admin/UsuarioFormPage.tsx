@@ -9,7 +9,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { usuarioRepositorio } from '@/services';
 import type { UsuarioNuevo } from '@/types';
 
-/** Alta (/admin/usuarios/nuevo) y edición (/admin/usuarios/:run/editar) con el mismo formulario del registro. */
 export function UsuarioFormPage() {
   const { run } = useParams();
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export function UsuarioFormPage() {
       resultado = await usuarioRepositorio.crear(datos);
     }
     if (resultado.ok) {
-      // Si el admin se editó a sí mismo, la sesión en memoria se actualiza.
       if (resultado.dato && resultado.dato.run === actual?.run) actualizarUsuario(resultado.dato);
       notificar(resultado.mensaje);
       navigate('/admin/usuarios');

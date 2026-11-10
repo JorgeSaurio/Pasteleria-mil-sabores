@@ -6,7 +6,6 @@ import { EstadoVacio } from '@/components/shared/EstadoVacio';
 import { useAsync } from '@/hooks/useAsync';
 import { categoriaRepositorio, productoRepositorio } from '@/services';
 
-/** Productos con stock ≤ stock crítico. Reutiliza la misma tabla del inventario. */
 export function ProductosCriticosPage() {
   const { datos, cargando, error } = useAsync(
     () => Promise.all([productoRepositorio.listarCriticos(), categoriaRepositorio.listar()]),

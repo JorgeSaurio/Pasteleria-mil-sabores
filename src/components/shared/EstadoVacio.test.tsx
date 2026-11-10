@@ -4,7 +4,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { EstadoVacio } from './EstadoVacio';
 
 test('debería mostrar título, mensaje y un enlace a la ruta de la acción', () => {
-  // Arrange
   renderConRouter(
     <EstadoVacio
       titulo="Tu carrito está vacío"
@@ -13,10 +12,8 @@ test('debería mostrar título, mensaje y un enlace a la ruta de la acción', ()
     />,
   );
 
-  // Act
   const enlace = screen.getByRole('link', { name: 'Explorar productos' });
 
-  // Assert
   expect(screen.getByRole('heading', { name: 'Tu carrito está vacío' })).toBeInTheDocument();
   expect(screen.getByText('Agrega productos para continuar.')).toBeInTheDocument();
   expect(enlace).toHaveAttribute('href', '/productos');

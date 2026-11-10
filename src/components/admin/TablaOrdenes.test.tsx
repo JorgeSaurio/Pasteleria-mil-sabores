@@ -5,7 +5,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { TablaOrdenes } from './TablaOrdenes';
 
 test('debería ocultar la columna Cliente con mostrarCliente=false y sumar los ítems de la orden', () => {
-  // Arrange
   const orden: Orden = {
     id: 'o1',
     numero: 1001,
@@ -23,10 +22,8 @@ test('debería ocultar la columna Cliente con mostrarCliente=false y sumar los �
     estado: 'pagada',
   };
 
-  // Act
   renderConRouter(<TablaOrdenes ordenes={[orden]} mostrarCliente={false} />);
 
-  // Assert
   expect(screen.queryByRole('columnheader', { name: 'Cliente' })).not.toBeInTheDocument();
   const fila = screen.getByRole('row', { name: /#1001/ });
   expect(within(fila).getByRole('cell', { name: '5' })).toBeInTheDocument();

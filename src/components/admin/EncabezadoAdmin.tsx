@@ -3,11 +3,9 @@ import type { ReactNode } from 'react';
 interface EncabezadoAdminProps {
   titulo: string;
   subtitulo?: string;
-  /** Botones a la derecha (ej. "Nuevo producto"). */
   acciones?: ReactNode;
 }
 
-/** Encabezado uniforme de todas las páginas del panel. */
 export function EncabezadoAdmin({ titulo, subtitulo, acciones }: EncabezadoAdminProps) {
   return (
     <header className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 pb-2 border-bottom">

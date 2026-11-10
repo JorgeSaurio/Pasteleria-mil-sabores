@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { ModalConfirmacion } from './ModalConfirmacion';
 
 test('debería llamar solo a onConfirmar al pulsar el botón de confirmación', async () => {
-  // Arrange
   const user = userEvent.setup();
   const alConfirmar = vi.fn();
   const alCancelar = vi.fn();
@@ -19,10 +18,8 @@ test('debería llamar solo a onConfirmar al pulsar el botón de confirmación', 
     />,
   );
 
-  // Act
   await user.click(screen.getByRole('button', { name: 'Eliminar' }));
 
-  // Assert
   expect(screen.getByRole('dialog', { name: 'Eliminar producto' })).toBeInTheDocument();
   expect(alConfirmar).toHaveBeenCalledTimes(1);
   expect(alCancelar).not.toHaveBeenCalled();

@@ -6,7 +6,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { TablaProductosAdmin } from './TablaProductosAdmin';
 
 test('debería marcar el stock crítico y entregar el producto a onEliminar', async () => {
-  // Arrange
   const user = userEvent.setup();
   const producto: Producto = {
     id: 'TC001',
@@ -24,10 +23,8 @@ test('debería marcar el stock crítico y entregar el producto a onEliminar', as
   );
   const fila = screen.getByRole('row', { name: /TC001/ });
 
-  // Act
   await user.click(within(fila).getByRole('button', { name: 'Eliminar' }));
 
-  // Assert
   expect(within(fila).getByText('Crítico (2)')).toBeInTheDocument();
   expect(within(fila).getByText('Tortas Cuadradas')).toBeInTheDocument();
   expect(alEliminar).toHaveBeenCalledWith(producto);

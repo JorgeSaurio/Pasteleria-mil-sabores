@@ -5,10 +5,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { ordenRepositorio } from '@/services';
 import { NoEncontradoPage } from './NoEncontradoPage';
 
-/**
- * Pago con error (nueva, Figura 8). NO vacía el carrito: el cliente puede
- * volver al checkout y reintentar sin perder su pedido.
- */
 export function CompraFallidaPage() {
   const { ordenId = '' } = useParams();
   const { datos: orden, cargando } = useAsync(() => ordenRepositorio.obtenerPorId(ordenId), [ordenId]);

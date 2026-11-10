@@ -13,12 +13,6 @@ import { categoriaRepositorio, productoRepositorio } from '@/services';
 
 const TAMANO_PAGINA = 12;
 
-/**
- * Catálogo con filtro, buscador y paginación.
- * Los filtros viven en la URL (?categoria=&q=&pagina=), no en useState:
- * el enlace es compartible y "atrás" restaura el filtro.
- * El filtrado lo hace el REPOSITORIO (en memoria hoy, en el servidor mañana), no la página.
- */
 export function ProductosPage() {
   const [parametros, setParametros] = useSearchParams();
   const categoria = parametros.get('categoria') ?? '';
@@ -32,7 +26,6 @@ export function ProductosPage() {
     [categoria, busqueda, pagina],
   );
 
-  /** Cambia un filtro y vuelve a la página 1 (salvo que se cambie la página misma). */
   const actualizar = useCallback(
     (cambios: Record<string, string>) => {
       setParametros((previos) => {

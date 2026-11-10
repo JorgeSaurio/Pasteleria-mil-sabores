@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof obtenerCatalogo !== "function") return;
 
-  // Este módulo solo aplica en detalle-producto.html. Si el DOM de detalle no
-  // está presente, se auto-inactiva para no tocar document.title en otra página.
   const nombre = document.getElementById("nombre-producto");
   if (!nombre) return;
 
@@ -21,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const descripcion = document.getElementById("descripcion-producto");
   const imagen = document.getElementById("img-producto");
 
-  // Inyección de datos principales
   document.title = `Pastelería Mil Sabores | ${producto.nombre}`;
 
   if (breadcrumb) breadcrumb.textContent = producto.nombre;
@@ -38,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Evento Añadir al Carrito
   const btnAgregar = document.getElementById("btn-agregar-detalle");
   const inputCantidad = document.getElementById("cantidad-producto");
   const alerta = document.getElementById("alerta-agregado");
@@ -63,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Productos relacionados
   const contenedorRel = document.getElementById("grilla-relacionados");
   if (contenedorRel) {
     const relacionados = catalogo

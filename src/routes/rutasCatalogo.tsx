@@ -9,11 +9,6 @@ import { NosotrosPage } from '@/pages/tienda/NosotrosPage';
 import { OfertasPage } from '@/pages/tienda/OfertasPage';
 import { ProductosPage } from '@/pages/tienda/ProductosPage';
 
-/**
- * Rutas de la tienda pública (Sección 4): inicio, productos, categorías, ofertas,
- * blog, nosotros y contacto. Reemplaza el stub creado en la Sección 3.
- * Rutas relativas: son hijas de "/" (TiendaLayout).
- */
 export const rutasCatalogo: RouteObject[] = [
   { index: true, element: <HomePage /> },
   { path: 'productos', element: <ProductosPage /> },

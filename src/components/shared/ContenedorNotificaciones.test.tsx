@@ -5,7 +5,6 @@ import { renderConContextos } from '@/test/renderConProveedores';
 import { ContenedorNotificaciones } from './ContenedorNotificaciones';
 
 test('debería mostrar las notificaciones y descartar por id la que se pulsa', async () => {
-  // Arrange
   const user = userEvent.setup();
   const { notificacion } = renderConContextos(<ContenedorNotificaciones />, {
     notificacion: {
@@ -16,10 +15,8 @@ test('debería mostrar las notificaciones y descartar por id la que se pulsa', a
     },
   });
 
-  // Act
   await user.click(screen.getByText('Producto eliminado del carrito'));
 
-  // Assert
   expect(screen.getByText('Torta agregada al carrito')).toBeInTheDocument();
   expect(notificacion.descartar).toHaveBeenCalledWith(2);
 });

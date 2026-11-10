@@ -2,7 +2,6 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 
-// Alias "@" → "src" para evitar imports del tipo "../../../".
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,7 +9,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  // Pruebas unitarias (Vitest + Testing Library). Sin red: datos siempre en modo local.
+  // Las pruebas usan siempre datos locales.
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],

@@ -20,7 +20,6 @@ const PILARES = [
   },
 ];
 
-/** Página institucional. Misión/visión y equipo como arreglos + .map. */
 export function NosotrosPage() {
   return (
     <div className="container my-5">

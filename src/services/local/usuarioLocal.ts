@@ -6,11 +6,7 @@ import type { UsuarioRepositorio } from '../contratos/UsuarioRepositorio';
 import { CLAVES, CLAVES_LEGADAS, eliminar, existe, guardar, leer } from './storage';
 import { exito, fallo, paginar, responder } from './utilidades';
 
-/**
- * Registro tal como se guarda en la "BD" local: incluye contraseña.
- * NUNCA sale de este archivo: hacia afuera solo se entrega Usuario (sin contraseña).
- * (Contraseña en texto plano: aceptable SOLO por ser un mock académico; con backend se guarda hasheada.)
- */
+// Incluye la contraseña. Nunca sale de este archivo.
 type UsuarioAlmacenado = UsuarioNuevo;
 
 export function limpiarRun(run: string): string {
@@ -27,7 +23,6 @@ function esRol(valor: unknown): valor is Rol {
   return typeof valor === 'string' && (ROLES as readonly string[]).includes(valor);
 }
 
-/** Acepta el formato nuevo y el del proyecto HTML (name, dir, tel, tipo). */
 function normalizarUsuario(crudo: unknown): UsuarioAlmacenado | null {
   if (!crudo || typeof crudo !== 'object') return null;
   const u = crudo as Record<string, unknown>;
@@ -53,7 +48,6 @@ function normalizarUsuario(crudo: unknown): UsuarioAlmacenado | null {
   };
 }
 
-/** clave nueva → registros del proyecto HTML (se migran) → semilla. Siempre garantiza un admin. */
 function cargarUsuarios(): UsuarioAlmacenado[] {
   let lista: UsuarioAlmacenado[];
   if (existe(CLAVES.usuarios)) {
@@ -77,14 +71,12 @@ function guardarUsuarios(lista: UsuarioAlmacenado[]): void {
   guardar(CLAVES.usuarios, lista);
 }
 
-/** Usado por authLocal. No es parte del contrato. */
 export function buscarPorCredenciales(email: string, password: string): Usuario | null {
   const correo = email.trim().toLowerCase();
   const encontrado = cargarUsuarios().find((u) => u.email === correo && u.password === password);
   return encontrado ? quitarPassword(encontrado) : null;
 }
 
-/** Usado por authLocal para refrescar la sesión. No es parte del contrato. */
 export function buscarPorRunSincrono(run: string): Usuario | null {
   const encontrado = cargarUsuarios().find((u) => u.run === limpiarRun(run));
   return encontrado ? quitarPassword(encontrado) : null;

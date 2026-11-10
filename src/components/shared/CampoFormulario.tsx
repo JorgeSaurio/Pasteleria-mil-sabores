@@ -7,12 +7,10 @@ interface CampoFormularioProps {
   value: string;
   onChange: (evento: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type?: string;
-  /** Si existe, el campo se marca inválido y se muestra el mensaje. */
   error?: string;
   placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
-  /** 'textarea' para comentarios / indicaciones. */
   as?: 'input' | 'textarea';
   filas?: number;
   autoComplete?: string;
@@ -20,11 +18,6 @@ interface CampoFormularioProps {
   className?: string;
 }
 
-/**
- * Label + input + mensaje de error (patrón repetido ~30 veces en el HTML).
- * CONTROLADO: no guarda su valor; lo recibe por "value" y avisa con "onChange",
- * así el formulario padre tiene todos los valores en un solo objeto.
- */
 export function CampoFormulario({
   id,
   name,

@@ -5,21 +5,15 @@ import { useAuth } from '@/hooks/useAuth';
 import type { Rol } from '@/types';
 
 interface RutaProtegidaProps {
-  /** Por props para reutilizarla con distintos niveles de acceso. */
   rolesPermitidos: Rol[];
-  /** Si no se pasa children, renderiza las rutas hijas (<Outlet/>). */
   children?: ReactNode;
 }
 
-/**
- * Protege rutas en el frontend. Es una ayuda de UX: la autorización real
- * la debe hacer el backend en cada endpoint.
- */
+// Solo ayuda visual. El backend es quien autoriza.
 export function RutaProtegida({ rolesPermitidos, children }: RutaProtegidaProps) {
   const { estado, usuario, tieneRol } = useAuth();
   const location = useLocation();
 
-  // Mientras se valida la sesión guardada no se expulsa a nadie.
   if (estado === 'verificando') return <Cargando texto="Verificando sesión..." />;
 
   if (!usuario) return <Navigate to="/login" replace state={{ desde: location.pathname }} />;

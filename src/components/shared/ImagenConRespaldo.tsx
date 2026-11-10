@@ -9,11 +9,8 @@ interface ImagenConRespaldoProps {
   loading?: 'lazy' | 'eager';
 }
 
-/**
- * Reemplaza los onerror="this.src=..." del HTML.
- * El estado "fallo" evita un bucle infinito si la imagen de respaldo también falla.
- */
 export function ImagenConRespaldo({ src, alt, className, style, loading = 'lazy' }: ImagenConRespaldoProps) {
+  // Evita un bucle si el respaldo también falla.
   const [fallo, setFallo] = useState(false);
   return (
     <img

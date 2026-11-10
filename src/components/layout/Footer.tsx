@@ -10,7 +10,6 @@ const REDES = [
   { nombre: 'Facebook', icono: ICONOS.facebook, url: 'https://www.facebook.com/' },
 ];
 
-/** Footer estático. Medios de pago y redes como arreglos + .map (sin repetir marcado). */
 export function Footer() {
   return (
     <footer className="bg-dark text-white py-4 mt-auto">

@@ -1,8 +1,3 @@
-/**
- * Validadores puros. Cada uno recibe el valor y devuelve el mensaje de error o null.
- * Portan las reglas de js/validaciones.js. Dan feedback inmediato; el backend debe repetirlas.
- */
-
 export type Validador = (valor: string) => string | null;
 
 export const DOMINIOS_PERMITIDOS = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com'];
@@ -11,12 +6,10 @@ const REGEX_EMAIL_PERMITIDO = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|g
 const REGEX_EMAIL_FORMATO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const REGEX_TELEFONO = /^(\+56)?9[0-9]{8}$/;
 
-/** Quita puntos, guion y espacios: "21.088.533-1" → "210885331". */
 export function limpiarRun(valor: string): string {
   return (valor ?? '').replace(/[.\-\s]/g, '').toUpperCase();
 }
 
-/** Dígito verificador por módulo 11. */
 export function calcularDv(cuerpo: string): string {
   let suma = 0;
   let multiplicador = 2;
@@ -40,7 +33,6 @@ export function validarRun(valor: string): string | null {
   return null;
 }
 
-/** Fábrica: obligatorio + largo máximo. */
 export function requerido(nombreCampo: string, maximo?: number): Validador {
   return (valor) => {
     const limpio = (valor ?? '').trim();
@@ -54,7 +46,6 @@ export const validarNombre = requerido('El nombre', 50);
 export const validarApellidos = requerido('Los apellidos', 100);
 export const validarDireccion = requerido('La dirección', 300);
 
-/** Correo con dominios permitidos (registro, login, contacto). */
 export function validarEmail(valor: string): string | null {
   const email = (valor ?? '').trim();
   if (!email) return 'El correo es obligatorio.';
@@ -65,7 +56,6 @@ export function validarEmail(valor: string): string | null {
   return null;
 }
 
-/** Correo con formato válido, sin restringir dominio (checkout). */
 export function validarEmailFormato(valor: string): string | null {
   const email = (valor ?? '').trim();
   if (!email) return 'El correo es obligatorio.';
@@ -80,7 +70,6 @@ export function validarPassword(valor: string): string | null {
   return null;
 }
 
-/** Teléfono opcional: vacío es válido. */
 export function validarTelefono(valor: string): string | null {
   const telefono = (valor ?? '').trim();
   if (!telefono) return null;
@@ -91,13 +80,11 @@ export function validarSeleccion(mensaje: string): Validador {
   return (valor) => ((valor ?? '').trim() ? null : mensaje);
 }
 
-/** Confirmación (correo o contraseña repetidos): obligatorio y debe coincidir con el original. */
 export function validarConfirmacion(valor: string, original: string, mensaje: string): string | null {
   if (!valor) return 'Este campo es obligatorio.';
   return valor === original ? null : mensaje;
 }
 
-/** Valida que un texto numérico sea entero y esté dentro de un rango. */
 export function validarEntero(nombreCampo: string, minimo: number, opcional = false): Validador {
   return (valor) => {
     const limpio = (valor ?? '').trim();

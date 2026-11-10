@@ -5,7 +5,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { BlogCard } from './BlogCard';
 
 test('debería mostrar la miniatura de video y enlazar al detalle del blog', () => {
-  // Arrange
   const blog: Blog = {
     id: 'torta-gigante',
     etiqueta: 'Historia',
@@ -19,10 +18,8 @@ test('debería mostrar la miniatura de video y enlazar al detalle del blog', () 
     parrafos: [],
   };
 
-  // Act
   renderConRouter(<BlogCard blog={blog} />);
 
-  // Assert
   expect(screen.getByRole('heading', { name: 'La torta más grande del mundo' })).toBeInTheDocument();
   expect(screen.getByText('Reportaje en video')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: 'Ver caso' })).toHaveAttribute('href', '/blog/torta-gigante');

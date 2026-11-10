@@ -7,19 +7,15 @@ import { calcularDescuento, calcularSubtotal, calcularTotal, precioVigente } fro
 import { carritoReducer, ESTADO_INICIAL_CARRITO } from './carritoReducer';
 
 export interface CarritoContextValor {
-  /** false hasta leer el carrito guardado (evita redirigir "por carrito vacío" al recargar). */
   cargado: boolean;
   items: ItemCarrito[];
-  /** Items + producto actual del catálogo (derivado, nunca se persiste). */
   lineas: LineaCarrito[];
   cargandoLineas: boolean;
   totalItems: number;
   cupon: ResultadoCupon | null;
-  /** Montos ESTIMADOS para mostrar; el total oficial lo calcula procesarPago. */
   subtotal: number;
   descuento: number;
   total: number;
-  /** Recibe el producto completo (la tarjeta ya lo tiene) para validar stock sin otra petición. */
   agregar: (producto: Producto, cantidad?: number) => boolean;
   modificarCantidad: (productoId: string, delta: number) => boolean;
   eliminar: (productoId: string) => void;
@@ -37,7 +33,6 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
   const [cargandoLineas, setCargandoLineas] = useState(false);
   const { notificar } = useNotificacion();
 
-  // 1) Cargar lo guardado (y revalidar el cupón: pudo caducar).
   useEffect(() => {
     let vigente = true;
     (async () => {
@@ -50,13 +45,12 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // 2) Persistir cada cambio (solo después de haber cargado).
+  // Guarda cambios solo después de cargar.
   useEffect(() => {
     if (!estado.cargado) return;
     void carritoRepositorio.guardar({ items: estado.items, cupon: estado.cupon?.codigo ?? null });
   }, [estado.items, estado.cupon, estado.cargado]);
 
-  // 3) Traer los productos actuales de los ids del carrito (precio y stock al día).
   const claveIds = estado.items
     .map((i) => i.productoId)
     .sort()
@@ -75,7 +69,6 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
       .then((lista) => {
         if (!vigente) return;
         setProductos(Object.fromEntries(lista.map((p) => [p.id, p])));
-        // Productos eliminados del catálogo salen del carrito.
         if (lista.length < ids.length) dispatch({ tipo: 'QUITAR_INEXISTENTES', idsValidos: lista.map((p) => p.id) });
       })
       .finally(() => vigente && setCargandoLineas(false));

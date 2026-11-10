@@ -2,14 +2,11 @@ import { NavLink } from 'react-router-dom';
 import type { ItemMenuAdmin } from '@/config/menuAdmin';
 
 interface AdminSidebarProps {
-  /** Ítems ya filtrados por rol: el sidebar solo los dibuja. */
   items: ItemMenuAdmin[];
   rol: string;
-  /** Permite al layout cerrar el menú en móvil al elegir una opción. */
   onNavegar?: () => void;
 }
 
-/** Menú lateral declarativo: recibe la lista por props en vez de tener enlaces escritos a mano. */
 export function AdminSidebar({ items, rol, onNavegar }: AdminSidebarProps) {
   return (
     <div className="card border-0 shadow-sm p-3 bg-white h-100">

@@ -2,7 +2,6 @@ import type { Categoria } from '@/types';
 
 const IMG = 'https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Fcatalogo%2F';
 
-/** Categorías semilla. Antes eran un texto repetido dentro de cada producto. */
 export const CATEGORIAS_INICIALES: Categoria[] = [
   { id: 'tortas-cuadradas', nombre: 'Tortas Cuadradas', imagen: `${IMG}torta-cuadrada-chocolate.png` },
   { id: 'tortas-circulares', nombre: 'Tortas Circulares', imagen: `${IMG}torta-circular-vainilla.jpg` },

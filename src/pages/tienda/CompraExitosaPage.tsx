@@ -9,17 +9,13 @@ import { ordenRepositorio } from '@/services';
 import { formatearFecha } from '@/utils/formato';
 import { NoEncontradoPage } from './NoEncontradoPage';
 
-/**
- * Compra exitosa (nueva, Figura 7). Lee la orden por el id de la URL:
- * recargar la página (F5) no pierde el resumen.
- */
 export function CompraExitosaPage() {
   const { ordenId = '' } = useParams();
   const { vaciar } = useCarrito();
   const { notificar } = useNotificacion();
   const { datos: orden, cargando } = useAsync(() => ordenRepositorio.obtenerPorId(ordenId), [ordenId]);
 
-  // El pago se concretó: recién ahora se vacía el carrito.
+  // El pago se concretó. Ahora se vacía el carrito.
   const pagada = orden?.estado === 'pagada';
   useEffect(() => {
     if (pagada) vaciar();

@@ -1,20 +1,12 @@
 
 const CLAVE_INVENTARIO = "mil_sabores_inventario";
 
-/**
- * Imagen usada cuando un producto no declara una válida. Es una URL absoluta a
- propósito: el mismo valor sirve desde la raíz y desde /admin/, sin rutas relativas.
- */
 const IMAGEN_POR_DEFECTO = "https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Flogo.jpeg";
 
 const STOCK_CRITICO_POR_DEFECTO = 5;
 const STOCK_POR_DEFECTO = 15;
 const STOCK_INICIAL_BAJO = 3;
 
-/**
- * Catálogo semilla. Solo se usa la primera vez que se visita el sitio
- * (cuando aún no existe nada en localStorage); después manda el inventario.
- */
 const CATALOGO_INICIAL = [
   {
     id: "TC001",
@@ -146,21 +138,10 @@ const CATALOGO_INICIAL = [
   }
 ];
 
-/** Categorías del catálogo semilla, en orden de aparición. */
 const CATEGORIAS_BASE = [...new Set(CATALOGO_INICIAL.map(p => p.categoria))];
 
-/**
- * Rutas que el proyecto usó antes y que ya no resuelven a ningún archivo.
- * Se tratan como "sin imagen declarada" para que caiga en IMAGEN_POR_DEFECTO.
- */
 const RUTAS_IMAGEN_LEGADAS = ["logo.jpeg", "../logo.jpeg", "../../logo.jpeg"];
 
-/**
- * Normaliza un registro de producto cualquiera (base, localStorage o formulario)
- * devolviendo siempre la misma forma de objeto.
- * @param {object} producto
- * @returns {object|null} Producto válido o null si no se puede normalizar
- */
 function normalizarProducto(producto) {
   if (!producto || typeof producto !== "object") return null;
 
@@ -187,10 +168,6 @@ function normalizarProducto(producto) {
   };
 }
 
-/**
- * Construye el inventario a partir del catálogo semilla.
- * @returns {Array<object>}
- */
 function crearInventarioInicial() {
   return CATALOGO_INICIAL.map((p, idx) => normalizarProducto({
     ...p,
@@ -199,11 +176,6 @@ function crearInventarioInicial() {
   }));
 }
 
-/**
- * Persiste el inventario normalizado.
- * @param {Array<object>} catalogo
- * @returns {Array<object>} El inventario tal como quedó guardado
- */
 function guardarCatalogo(catalogo) {
   const normalizado = (Array.isArray(catalogo) ? catalogo : [])
     .map(normalizarProducto)
@@ -218,11 +190,6 @@ function guardarCatalogo(catalogo) {
   return normalizado;
 }
 
-/**
- * Lee el inventario persistido. Si no existe o está corrupto, lo inicializa
- * con el catálogo semilla.
- * @returns {Array<object>}
- */
 function obtenerCatalogo() {
   try {
     const data = localStorage.getItem(CLAVE_INVENTARIO);
@@ -238,41 +205,21 @@ function obtenerCatalogo() {
   return guardarCatalogo(crearInventarioInicial());
 }
 
-/**
- * Busca un producto del inventario por su id
- * @param {string} id
- * @returns {object|null} El producto o null si no existe
- */
 function obtenerProductoPorId(id) {
   if (!id) return null;
   return obtenerCatalogo().find(p => p.id === String(id).trim().toUpperCase()) || null;
 }
 
-/**
- * Categorías presentes en el inventario actual, en orden de aparición.
- * @returns {Array<string>}
- */
 function obtenerCategorias() {
   return [...new Set(obtenerCatalogo().map(p => p.categoria).filter(Boolean))];
 }
 
-/**
- * Indica si un producto tiene stock para la cantidad pedida.
- * @param {object} producto
- * @param {number} cantidad
- * @returns {boolean}
- */
 function tieneStock(producto, cantidad = 1) {
   if (!producto) return false;
   const pedido = Number(cantidad);
   return Number.isFinite(pedido) && Number(producto.stock) >= pedido;
 }
 
-/**
- * Crea un producto en el inventario.
- * @param {object} datos
- * @returns {{ok: boolean, mensaje: string, producto: object|null}}
- */
 function crearProducto(datos) {
   const producto = normalizarProducto(datos);
   if (!producto) {
@@ -288,11 +235,6 @@ function crearProducto(datos) {
   return { ok: true, mensaje: "¡Producto agregado exitosamente al inventario!", producto };
 }
 
-/**
- * Actualiza un producto existente del inventario.
- * @param {object} datos
- * @returns {{ok: boolean, mensaje: string, producto: object|null}}
- */
 function actualizarProducto(datos) {
   const producto = normalizarProducto(datos);
   if (!producto) {
@@ -308,22 +250,10 @@ function actualizarProducto(datos) {
   return { ok: true, mensaje: "¡Producto actualizado con éxito!", producto };
 }
 
-/**
- * Elimina un producto del inventario.
- * @param {string} id
- * @returns {Array<object>} Inventario restante
- */
 function eliminarProducto(id) {
   return guardarCatalogo(obtenerCatalogo().filter(p => p.id !== id));
 }
 
-/**
- * Llena un <select> con las categorías del inventario.
- * Conserva la opción placeholder (value="") si el select ya tiene una.
- * @param {HTMLSelectElement} select
- * @param {{todas?: string}} [opciones] "todas" agrega una opción general al inicio
- *   y la deja seleccionada por defecto
- */
 function poblarSelectCategorias(select, opciones = {}) {
   if (!select) return;
 

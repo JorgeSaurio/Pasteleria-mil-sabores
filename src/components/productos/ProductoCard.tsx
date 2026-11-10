@@ -7,20 +7,13 @@ import { BotonAgregarCarrito } from './BotonAgregarCarrito';
 
 export interface ProductoCardProps {
   producto: Producto;
-  /** El padre decide qué hacer al agregar (normalmente carrito.agregar). */
   onAgregar?: (producto: Producto) => boolean;
   nombreCategoria?: string;
   mostrarDescripcion?: boolean;
   altoImagen?: number;
-  /** Versión compacta sin botón (productos relacionados). */
   compacta?: boolean;
 }
 
-/**
- * Una sola tarjeta reemplaza las TRES variantes del HTML (home, catálogo, relacionados).
- * Es PRESENTACIONAL: no usa el contexto del carrito, recibe "onAgregar" del padre.
- * Así se reutiliza en cualquier lista y se prueba pasando una función simulada.
- */
 export function ProductoCard({
   producto,
   onAgregar,

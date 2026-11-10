@@ -1,7 +1,6 @@
 import { EstadoVacio } from '@/components/shared/EstadoVacio';
 
 interface NoEncontradoPageProps {
-  /** Personalizable: el detalle de producto/blog la reutiliza con su propio mensaje. */
   titulo?: string;
   mensaje?: string;
 }

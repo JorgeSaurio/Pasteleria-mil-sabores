@@ -6,7 +6,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { CarritoItem } from './CarritoItem';
 
 test('debería avisar con el callback correcto al pulsar aumentar, disminuir y eliminar', async () => {
-  // Arrange
   const user = userEvent.setup();
   const linea: LineaCarrito = {
     productoId: 'TC001',
@@ -31,12 +30,10 @@ test('debería avisar con el callback correcto al pulsar aumentar, disminuir y e
     <CarritoItem linea={linea} onIncrementar={alIncrementar} onDecrementar={alDecrementar} onEliminar={alEliminar} />,
   );
 
-  // Act
   await user.click(screen.getByRole('button', { name: 'Aumentar cantidad de Torta de Chocolate' }));
   await user.click(screen.getByRole('button', { name: 'Disminuir cantidad de Torta de Chocolate' }));
   await user.click(screen.getByRole('button', { name: 'Eliminar Torta de Chocolate del carrito' }));
 
-  // Assert
   expect(alIncrementar).toHaveBeenCalledTimes(1);
   expect(alDecrementar).toHaveBeenCalledTimes(1);
   expect(alEliminar).toHaveBeenCalledTimes(1);

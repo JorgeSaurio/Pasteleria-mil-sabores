@@ -2,7 +2,6 @@
 
 
 :root {
-  /* Paleta colores*/
   --color-fondo: #FFF5E1;
   --color-rosa: #FFC0CB;
   --color-chocolate: #8B4513;
@@ -25,7 +24,6 @@ body {
 }
 
 
-/* navbar*/
 .navbar-icon {
   vertical-align: middle;
   margin-right: 6px;
@@ -45,7 +43,6 @@ body {
 }
 
 
-/*Contador del carrito.js */
 .ms-carrito-contador {
   display: inline-flex;
   align-items: center;
@@ -63,7 +60,6 @@ body {
 }
 
 
-/* secciones*/
 .hero-section {
   background: linear-gradient(180deg, var(--color-fondo) 0%, #ffffff 100%);
   border-bottom: 1px solid #f6e6d4;
@@ -76,7 +72,6 @@ body {
 }
 
 
-/* boton contador de productos */
 .btn-anadir {
   background-color: var(--color-chocolate);
   border-color: var(--color-chocolate);
@@ -111,7 +106,6 @@ body {
 }
 
 
-/* confirmacipn */
 .btn-anadir.is-added,
 .btn-anadir.is-added:hover,
 .btn-anadir.is-added:focus {
@@ -183,7 +177,6 @@ body {
 }
 
 
-/* toasts */
 .ms-notificaciones {
   position: fixed;
   right: 1rem;
@@ -222,7 +215,6 @@ body {
 .ms-notificacion--danger  { background: #a53434; }
 
 
-/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
   .btn-anadir,
   .product-card,

@@ -6,7 +6,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { useCarrito } from '@/hooks/useCarrito';
 import { productoRepositorio } from '@/services';
 
-/** Vista Ofertas (nueva): productos con precioOferta vigente. */
 export function OfertasPage() {
   const { agregar } = useCarrito();
   const { datos, cargando, error, recargar } = useAsync(() => productoRepositorio.listarOfertas(), []);

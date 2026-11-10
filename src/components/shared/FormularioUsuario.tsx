@@ -23,15 +23,8 @@ import { SelectorRegionComuna } from './SelectorRegionComuna';
 export type ModoFormularioUsuario = 'registro' | 'admin' | 'perfil';
 
 interface FormularioUsuarioProps {
-  /**
-   * registro: público, rol fijo "Cliente".
-   * admin: permite elegir rol.
-   * perfil: el usuario edita sus propios datos (sin rol).
-   */
   modo: ModoFormularioUsuario;
-  /** Si viene, el formulario está en modo edición (RUN de solo lectura, contraseña opcional). */
   usuarioInicial?: Usuario;
-  /** El formulario no sabe si crea o actualiza: lo decide la página. */
   onEnviar: (datos: UsuarioNuevo) => Promise<ResultadoOperacion<Usuario>>;
   textoBoton?: string;
 }
@@ -70,10 +63,6 @@ function valoresDesde(usuario?: Usuario): ValoresUsuario {
   };
 }
 
-/**
- * Registro público, alta/edición admin y perfil comparten casi todos los campos
- * y validaciones: un solo formulario configurado por "modo".
- */
 export function FormularioUsuario({ modo, usuarioInicial, onEnviar, textoBoton }: FormularioUsuarioProps) {
   const esEdicion = !!usuarioInicial;
   const [resultado, setResultado] = useState<{ mensaje: string; variante: Variante } | null>(null);
@@ -87,7 +76,6 @@ export function FormularioUsuario({ modo, usuarioInicial, onEnviar, textoBoton }
     rol: modo === 'admin' ? validarSeleccion('Selecciona un tipo de usuario.') : undefined,
     region: validarSeleccion('Selecciona una región.'),
     comuna: validarSeleccion('Selecciona una comuna.'),
-    // En edición la contraseña es opcional: solo se valida si se escribe algo.
     password: (valor) => (esEdicion && !valor ? null : validarPassword(valor)),
     password2: (valor, valores) =>
       esEdicion && !valores.password ? null : validarConfirmacion(valor, valores.password, 'Las contraseñas no coinciden.'),

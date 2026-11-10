@@ -6,7 +6,6 @@ interface BlogCardProps {
   blog: Blog;
 }
 
-/** Elemento del listado de blogs. Si el artículo es un video, muestra una miniatura informativa. */
 export function BlogCard({ blog }: BlogCardProps) {
   return (
     <article className="card border-0 shadow-sm p-3">

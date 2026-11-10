@@ -12,7 +12,6 @@ interface CampoSelectProps {
   value: string;
   opciones: OpcionSelect[];
   onChange: (evento: ChangeEvent<HTMLSelectElement>) => void;
-  /** Opción inicial con value="" (ej. "Selecciona una región"). */
   placeholder?: string;
   error?: string;
   required?: boolean;
@@ -20,7 +19,6 @@ interface CampoSelectProps {
   className?: string;
 }
 
-/** Igual que CampoFormulario pero para <select>. También controlado. */
 export function CampoSelect({
   id,
   name,

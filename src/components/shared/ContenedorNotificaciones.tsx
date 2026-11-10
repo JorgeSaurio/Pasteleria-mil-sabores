@@ -1,6 +1,5 @@
 import { useNotificacion } from '@/hooks/useNotificacion';
 
-/** Pinta los toasts del NotificacionContext. Se renderiza una vez en cada layout. */
 export function ContenedorNotificaciones() {
   const { notificaciones, descartar } = useNotificacion();
 

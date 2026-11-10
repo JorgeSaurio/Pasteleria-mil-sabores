@@ -2,21 +2,13 @@ import { entorno } from '@/config/entorno';
 import { EVENTO_SESION_EXPIRADA, leerToken } from '../sesionAlmacen';
 import { ErrorApi } from './errores';
 
-/**
- * Cliente HTTP central. Hoy no lo usa ningún repositorio (modo local), pero queda listo
- * para que los futuros services/http/*Http.ts solo describan endpoints.
- * Ningún componente debe usar fetch directamente.
- */
-
 type Metodo = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 interface OpcionesPeticion {
   metodo?: Metodo;
   cuerpo?: unknown;
-  /** Query params: { pagina: 1, busqueda: 'torta' } → ?pagina=1&busqueda=torta */
   parametros?: Record<string, string | number | boolean | undefined>;
   timeoutMs?: number;
-  /** Permite cancelar desde fuera (ej. una búsqueda reemplazada por otra). */
   signal?: AbortSignal;
 }
 
@@ -64,7 +56,6 @@ export async function peticion<T>(ruta: string, opciones: OpcionesPeticion = {})
   if (respuesta.status === 401) window.dispatchEvent(new Event(EVENTO_SESION_EXPIRADA));
 
   if (!respuesta.ok) {
-    // Formato de error acordado con backend: { codigo, mensaje, errores?: { campo: mensaje } }
     const cuerpoError = (await respuesta.json().catch(() => ({}))) as {
       codigo?: string;
       mensaje?: string;
@@ -82,7 +73,6 @@ export async function peticion<T>(ruta: string, opciones: OpcionesPeticion = {})
   return (await respuesta.json()) as T;
 }
 
-/** Atajos por verbo. */
 export const http = {
   get: <T>(ruta: string, opciones?: Omit<OpcionesPeticion, 'metodo' | 'cuerpo'>) =>
     peticion<T>(ruta, { ...opciones, metodo: 'GET' }),

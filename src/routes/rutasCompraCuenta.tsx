@@ -6,11 +6,6 @@ import { CompraFallidaPage } from '@/pages/tienda/CompraFallidaPage';
 import { LoginPage } from '@/pages/tienda/LoginPage';
 import { RegistroPage } from '@/pages/tienda/RegistroPage';
 
-/**
- * Rutas de compra y cuenta (Sección 5): carrito, checkout, resultado de compra, login y registro.
- * Reemplaza el stub creado en la Sección 3.
- * Rutas relativas: son hijas de "/" (TiendaLayout).
- */
 export const rutasCompraCuenta: RouteObject[] = [
   { path: 'carrito', element: <CarritoPage /> },
   { path: 'checkout', element: <CheckoutPage /> },

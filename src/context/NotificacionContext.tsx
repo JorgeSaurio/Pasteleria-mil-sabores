@@ -16,10 +16,6 @@ export interface NotificacionContextValor {
 
 export const NotificacionContext = createContext<NotificacionContextValor | null>(null);
 
-/**
- * Toasts globales: cualquier componente puede avisar algo sin pasar callbacks
- * por varios niveles (prop drilling). Reemplaza window.mostrarNotificacion.
- */
 export function NotificacionProvider({ children }: { children: ReactNode }) {
   const [notificaciones, setNotificaciones] = useState<Notificacion[]>([]);
   const temporizadores = useRef(new Map<number, ReturnType<typeof setTimeout>>());
@@ -44,7 +40,6 @@ export function NotificacionProvider({ children }: { children: ReactNode }) {
     [descartar],
   );
 
-  // Limpia temporizadores pendientes si el provider se desmonta.
   useEffect(() => {
     const mapa = temporizadores.current;
     return () => mapa.forEach((t) => clearTimeout(t));

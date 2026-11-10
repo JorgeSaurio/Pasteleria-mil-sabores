@@ -2,19 +2,13 @@ import { useEffect, useState } from 'react';
 
 interface BuscadorProductosProps {
   valorInicial: string;
-  /** Se llama ~300 ms después de la última tecla (debounce). */
   onBuscar: (texto: string) => void;
   retardoMs?: number;
 }
 
-/**
- * Buscador con debounce. El texto que se escribe es estado LOCAL: así no se lanza
- * una búsqueda (y, con backend, una petición HTTP) por cada letra.
- */
 export function BuscadorProductos({ valorInicial, onBuscar, retardoMs = 300 }: BuscadorProductosProps) {
   const [texto, setTexto] = useState(valorInicial);
 
-  // Si la URL cambia desde fuera (ej. botón "atrás"), el input se sincroniza.
   useEffect(() => {
     setTexto(valorInicial);
   }, [valorInicial]);

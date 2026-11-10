@@ -1,7 +1,3 @@
-/**
- * Lee y valida las variables de entorno UNA sola vez.
- * El resto de la app importa "entorno" y nunca toca import.meta.env directamente.
- */
 export type ModoDatos = 'local' | 'http';
 
 const modoDatos: ModoDatos = import.meta.env.VITE_MODO_DATOS === 'http' ? 'http' : 'local';

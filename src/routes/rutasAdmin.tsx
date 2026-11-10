@@ -13,11 +13,6 @@ import { ReportesPage } from '@/pages/admin/ReportesPage';
 import { UsuarioFormPage } from '@/pages/admin/UsuarioFormPage';
 import { UsuariosAdminPage } from '@/pages/admin/UsuariosAdminPage';
 
-/**
- * Rutas del panel (Sección 6). Reemplaza el stub creado en la Sección 3.
- * Son hijas de "/admin", que ya exige rol Administrador o Vendedor.
- * Categorías, usuarios y reportes además exigen Administrador (RutaProtegida anidada).
- */
 export const rutasAdmin: RouteObject[] = [
   { index: true, element: <DashboardPage /> },
   { path: 'ordenes', element: <OrdenesPage /> },

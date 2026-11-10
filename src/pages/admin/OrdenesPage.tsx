@@ -11,7 +11,6 @@ import type { EstadoOrden } from '@/types';
 
 const TAMANO_PAGINA = 10;
 
-/** Órdenes / boletas (nuevo). Filtro por estado en la URL. */
 export function OrdenesPage() {
   const [parametros, setParametros] = useSearchParams();
   const estado = (parametros.get('estado') ?? '') as EstadoOrden | '';

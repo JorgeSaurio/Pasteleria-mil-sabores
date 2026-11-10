@@ -6,11 +6,7 @@ import { cargarProductos, guardarProductos } from './productoLocal';
 import { limpiarRun } from './usuarioLocal';
 import { exito, fallo, responder } from './utilidades';
 
-/**
- * SIMULACIÓN DEL SERVIDOR. Todo lo de este archivo lo hará el backend:
- * el frontend nunca decide precios, descuentos ni stock.
- */
-
+// Simula el servidor. Esto lo hará el backend.
 const CUPONES: Record<string, number> = { FELICES50: 0.1 };
 
 function evaluarCupon(codigo: string): ResultadoCupon {
@@ -40,8 +36,7 @@ export const pagoLocal: PagoRepositorio = {
     const items: ItemOrden[] = [];
     let motivoRechazo: string | undefined;
 
-    // 1) Precios SIEMPRE desde el catálogo, nunca desde lo que envía el cliente.
-    // 2) Stock revalidado en el momento de pagar.
+    // El precio sale del catálogo, nunca del cliente.
     for (const item of solicitud.items) {
       const producto = productos.find((p) => p.id === item.productoId);
       if (!producto) {
@@ -61,7 +56,6 @@ export const pagoLocal: PagoRepositorio = {
       });
     }
 
-    // Medio de pago de demostración: permite mostrar el flujo de error en la presentación.
     if (!motivoRechazo && solicitud.medioPago === 'prueba-rechazo') {
       motivoRechazo = 'El medio de pago fue rechazado por el emisor (simulación).';
     }
@@ -87,7 +81,7 @@ export const pagoLocal: PagoRepositorio = {
     });
 
     if (estado === 'pagada') {
-      // 3) Descuento de stock solo si el pago se concretó.
+      // El stock baja solo si el pago se concretó.
       guardarProductos(
         productos.map((p) => {
           const vendido = items.find((i) => i.productoId === p.id);

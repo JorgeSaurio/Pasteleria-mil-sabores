@@ -5,7 +5,6 @@ interface GrillaEsqueletoProps {
   columnas?: string;
 }
 
-/** Tarjetas "fantasma" mientras cargan los productos (clases ms-esqueleto del CSS original). */
 export function GrillaEsqueleto({ cantidad = 8, columnas = COLUMNAS_POR_DEFECTO }: GrillaEsqueletoProps) {
   return (
     <div className={`row ${columnas} g-4`} aria-hidden="true">

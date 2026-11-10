@@ -4,7 +4,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { usuarioRepositorio } from '@/services';
 import type { UsuarioNuevo } from '@/types';
 
-/** Registro público: reutiliza FormularioUsuario en modo "registro" (rol fijo Cliente). */
 export function RegistroPage() {
   const navigate = useNavigate();
   const { notificar } = useNotificacion();

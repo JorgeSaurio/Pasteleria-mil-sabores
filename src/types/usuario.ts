@@ -2,7 +2,6 @@ export type Rol = 'Administrador' | 'Vendedor' | 'Cliente';
 
 export const ROLES: readonly Rol[] = ['Administrador', 'Vendedor', 'Cliente'];
 
-/** Lo que la UI lee y muestra. NUNCA incluye contraseña (un backend no la devuelve). */
 export interface Usuario {
   run: string;
   nombre: string;
@@ -16,12 +15,10 @@ export interface Usuario {
   rol: Rol;
 }
 
-/** Solo al registrar / crear. */
 export interface UsuarioNuevo extends Usuario {
   password: string;
 }
 
-/** Solo al editar: todo opcional, la contraseña se cambia solo si viene. */
 export interface CambioUsuario extends Partial<Omit<Usuario, 'run'>> {
   password?: string;
 }
@@ -31,7 +28,6 @@ export interface Credenciales {
   password: string;
 }
 
-/** Sesión autenticada. En modo local el token es simulado; con backend será un JWT. */
 export interface Sesion {
   token: string;
   usuario: Usuario;

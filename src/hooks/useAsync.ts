@@ -7,16 +7,6 @@ interface EstadoAsync<T> {
   error: string | null;
 }
 
-/**
- * Estandariza el patrón "cargando / error / datos" de toda página que lee del repositorio.
- *
- *   const { datos, cargando, error, recargar } =
- *     useAsync(() => productoRepositorio.listar(filtro), [filtro.categoriaId]);
- *
- * Ignora respuestas que llegan tarde (componente desmontado o dependencias cambiadas),
- * así una búsqueda vieja nunca pisa a una nueva.
- * Si más adelante se adopta TanStack Query, este hook es el único punto a reemplazar.
- */
 export function useAsync<T>(funcion: () => Promise<T>, dependencias: DependencyList) {
   const [estado, setEstado] = useState<EstadoAsync<T>>({ datos: null, cargando: true, error: null });
   const [version, setVersion] = useState(0);
@@ -36,7 +26,7 @@ export function useAsync<T>(funcion: () => Promise<T>, dependencias: DependencyL
     return () => {
       vigente = false;
     };
-    // Las dependencias las define quien llama (igual que useEffect).
+    // Las dependencias las define quien llama.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...dependencias, version]);
 

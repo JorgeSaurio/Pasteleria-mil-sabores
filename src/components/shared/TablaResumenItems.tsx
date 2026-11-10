@@ -10,11 +10,9 @@ export interface ItemResumen {
 }
 
 interface TablaResumenItemsProps {
-  /** Forma mínima: el padre adapta LineaCarrito (checkout) o ItemOrden (boleta). */
   items: ItemResumen[];
 }
 
-/** Tabla imagen/nombre/precio/cantidad/subtotal. Checkout, compra exitosa/fallida y boleta admin. */
 export function TablaResumenItems({ items }: TablaResumenItemsProps) {
   return (
     <div className="table-responsive">

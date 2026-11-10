@@ -1,7 +1,6 @@
 import { BlogCard } from '@/components/blog/BlogCard';
 import { BLOGS } from '@/data/blogs';
 
-/** Listado de blogs. Contenido estático (data/blogs.ts): no necesita repositorio. */
 export function BlogPage() {
   return (
     <div className="container my-5">

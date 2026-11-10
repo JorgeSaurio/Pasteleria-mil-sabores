@@ -2,7 +2,6 @@ import { useCallback, useState, type ChangeEvent, type FormEvent } from 'react';
 
 type ValoresFormulario = Record<string, string>;
 
-/** Un validador recibe el valor del campo y TODOS los valores (para confirmaciones). */
 export type ValidadorCampo<T extends ValoresFormulario> = (valor: string, valores: T) => string | null;
 
 export type Validadores<T extends ValoresFormulario> = Partial<Record<keyof T, ValidadorCampo<T>>>;
@@ -11,16 +10,9 @@ export type ErroresFormulario<T extends ValoresFormulario> = Partial<Record<keyo
 
 interface OpcionesFormulario<T extends ValoresFormulario> {
   validadores?: Validadores<T>;
-  /** Campos que se revalidan cuando cambia otro: { email: ['email2'] }. */
   dependientes?: Partial<Record<keyof T, (keyof T)[]>>;
 }
 
-/**
- * Formulario controlado genérico. Reemplaza el switch gigante de validaciones.js.
- * - Todos los valores son string (como en el DOM); se convierten a número al enviar.
- * - Valida en vivo al escribir y todo junto al enviar.
- * - setErrores permite volcar errores por campo que devuelva el backend.
- */
 export function useFormulario<T extends ValoresFormulario>(
   valoresIniciales: T,
   { validadores = {}, dependientes = {} }: OpcionesFormulario<T> = {},
@@ -34,7 +26,6 @@ export function useFormulario<T extends ValoresFormulario>(
     [validadores],
   );
 
-  /** Actualiza uno o varios campos a la vez y revalida esos campos y sus dependientes. */
   const setVarios = useCallback(
     (parcial: Partial<T>) => {
       const nuevos = { ...valores, ...parcial };
@@ -46,7 +37,6 @@ export function useFormulario<T extends ValoresFormulario>(
       setErrores((erroresPrevios) => {
         const siguiente = { ...erroresPrevios };
         aRevalidar.forEach((c) => {
-          // Un campo dependiente vacío no se marca hasta que el usuario lo toque.
           if (!cambiados.includes(c) && !nuevos[c]) return;
           const error = validarCampo(c, nuevos);
           if (error) siguiente[c] = error;
@@ -70,7 +60,6 @@ export function useFormulario<T extends ValoresFormulario>(
     [setValor],
   );
 
-  /** Valida todos los campos con validador. Devuelve true si no hay errores. */
   const validarTodo = useCallback((): boolean => {
     const nuevos: ErroresFormulario<T> = {};
     (Object.keys(validadores) as (keyof T)[]).forEach((campo) => {
@@ -81,10 +70,6 @@ export function useFormulario<T extends ValoresFormulario>(
     return Object.keys(nuevos).length === 0;
   }, [validadores, validarCampo, valores]);
 
-  /**
-   * Crea el handler de onSubmit: previene el envío nativo, valida y ejecuta "accion"
-   * marcando "enviando" mientras la promesa no resuelve (evita doble envío).
-   */
   const manejarEnvio = useCallback(
     (accion: (valores: T) => Promise<void> | void) => async (evento: FormEvent<HTMLFormElement>) => {
       evento.preventDefault();
@@ -102,11 +87,10 @@ export function useFormulario<T extends ValoresFormulario>(
   const reset = useCallback((nuevos?: T) => {
     setValoresEstado(nuevos ?? valoresIniciales);
     setErrores({});
-    // valoresIniciales se toma del primer render a propósito.
+    // Usa solo los valores del primer render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /** Convierte errores {campo: msg} del backend al formato del formulario. */
   const aplicarErroresServidor = useCallback((erroresServidor?: Record<string, string>) => {
     if (erroresServidor) setErrores((previos) => ({ ...previos, ...(erroresServidor as ErroresFormulario<T>) }));
   }, []);

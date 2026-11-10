@@ -5,16 +5,11 @@ import { formatearMoneda, resumirTexto } from '@/utils/formato';
 
 interface CarritoItemProps {
   linea: LineaCarrito;
-  /**
-   * Tres callbacks separados (y no un genérico onCambio) porque cada acción tiene
-   * reglas distintas: incrementar valida stock, decrementar a 0 elimina.
-   */
   onIncrementar: () => void;
   onDecrementar: () => void;
   onEliminar: () => void;
 }
 
-/** Fila del carrito. Presentacional: no conoce el contexto, solo avisa al padre. */
 export function CarritoItem({ linea, onIncrementar, onDecrementar, onEliminar }: CarritoItemProps) {
   const { producto, cantidad, precioUnitario, subtotal } = linea;
 

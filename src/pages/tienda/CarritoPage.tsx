@@ -8,10 +8,6 @@ import { EstadoVacio } from '@/components/shared/EstadoVacio';
 import { ModalConfirmacion } from '@/components/shared/ModalConfirmacion';
 import { useCarrito } from '@/hooks/useCarrito';
 
-/**
- * Carrito. Subtotal/descuento/total son DERIVADOS (vienen calculados del contexto),
- * nunca estado propio. El botón ya no hace alert(): lleva al checkout.
- */
 export function CarritoPage() {
   const carrito = useCarrito();
   const navigate = useNavigate();

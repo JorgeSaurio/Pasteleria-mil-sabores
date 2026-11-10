@@ -9,7 +9,6 @@ import type { Categoria, Producto, ResultadoOperacion } from '@/types';
 import { requerido, validarEntero, validarSeleccion } from '@/utils/validaciones';
 
 interface FormularioProductoProps {
-  /** Si viene, modo edición: el código (clave primaria) queda de solo lectura. */
   productoInicial?: Producto;
   categorias: Categoria[];
   onEnviar: (producto: Producto) => Promise<ResultadoOperacion<Producto>>;
@@ -27,7 +26,6 @@ type ValoresProducto = {
   descripcion: string;
 };
 
-/** Porta la validación de admin-form-productos y agrega el precio de oferta (opcional). */
 export function FormularioProducto({ productoInicial, categorias, onEnviar }: FormularioProductoProps) {
   const esEdicion = !!productoInicial;
   const [error, setError] = useState<string | null>(null);

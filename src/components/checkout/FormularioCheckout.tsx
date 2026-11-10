@@ -32,10 +32,8 @@ type ValoresCheckout = {
 };
 
 interface FormularioCheckoutProps {
-  /** Precarga desde el usuario en sesión (nota del instructivo). */
   valoresIniciales?: Partial<ValoresCheckout>;
   total: number;
-  /** Mientras es true el botón queda bloqueado: evita pagar dos veces. */
   procesando: boolean;
   onPagar: (datos: DatosCheckout) => Promise<void>;
 }
@@ -46,7 +44,6 @@ const MEDIOS_PAGO: { valor: MedioPago; etiqueta: string }[] = [
   { valor: 'prueba-rechazo', etiqueta: 'Tarjeta de prueba (siempre rechazada - demo)' },
 ];
 
-/** Datos del cliente + dirección de entrega + medio de pago (Figura 6). */
 export function FormularioCheckout({ valoresIniciales = {}, total, procesando, onPagar }: FormularioCheckoutProps) {
   const { valores, errores, handleChange, setVarios, manejarEnvio } = useFormulario<ValoresCheckout>(
     {

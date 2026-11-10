@@ -10,11 +10,6 @@ import { productoRepositorio } from '@/services';
 
 const CANTIDAD_DESTACADOS = 8;
 
-/**
- * Inicio. Los destacados se piden al repositorio; el setTimeout artificial del JS
- * original desaparece: ahora la espera es real (o simulada por la latencia local).
- * Render condicional en 4 ramas: cargando → error → vacío → grilla.
- */
 export function HomePage() {
   const { agregar } = useCarrito();
   const { datos, cargando, error, recargar } = useAsync(

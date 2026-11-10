@@ -13,7 +13,6 @@ const base: Omit<Producto, 'id' | 'nombre' | 'categoriaId'> = {
 };
 
 test('debería renderizar una tarjeta por producto con el nombre de su categoría', () => {
-  // Arrange
   const productos: Producto[] = [
     { ...base, id: 'TC001', nombre: 'Torta de Chocolate', categoriaId: 'TC' },
     { ...base, id: 'PSA001', nombre: 'Torta sin Azúcar', categoriaId: 'PSA' },
@@ -23,10 +22,8 @@ test('debería renderizar una tarjeta por producto con el nombre de su categorí
     { id: 'PSA', nombre: 'Productos sin azúcar' },
   ];
 
-  // Act
   renderConRouter(<ProductoGrilla productos={productos} categorias={categorias} />);
 
-  // Assert
   expect(screen.getAllByRole('article')).toHaveLength(2);
   expect(screen.getByText('Tortas Cuadradas')).toBeInTheDocument();
   expect(screen.getByText('Productos sin azúcar')).toBeInTheDocument();

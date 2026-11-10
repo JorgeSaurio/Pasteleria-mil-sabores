@@ -1,11 +1,6 @@
 const MS_CANTIDAD_DESTACADOS = 8;
 const MS_RETARDO_ESQUELETO_MS = 350;
 
-/**
- * Inserta tarjetas de carga mientras se resuelve la grilla
- * @param {HTMLElement} contenedor
- * @param {number} cantidad
- */
 function renderizarEsqueletos(contenedor, cantidad) {
   contenedor.innerHTML = Array.from({ length: cantidad }, () => `
     <div class="col">
@@ -24,10 +19,6 @@ function renderizarEsqueletos(contenedor, cantidad) {
   `).join("");
 }
 
-/**
- * Renderiza el estado vacío cuando el catálogo no tiene destacados
- * @param {HTMLElement} contenedor
- */
 function renderizarVacio(contenedor) {
   contenedor.innerHTML = `
     <div class="col-12">
@@ -40,10 +31,6 @@ function renderizarVacio(contenedor) {
   `;
 }
 
-/**
- * Renderiza la grilla de destacados del home
- * @param {HTMLElement} contenedor
- */
 function renderizarDestacados(contenedor) {
   if (typeof obtenerCatalogo !== "function") {
     console.error("app.js: falta js/datos-catalogo.js");

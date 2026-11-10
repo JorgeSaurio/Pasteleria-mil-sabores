@@ -4,7 +4,6 @@ interface IntegranteCardProps {
   descripcion: string;
 }
 
-/** Tarjeta de integrante del equipo (antes 3 bloques idénticos escritos a mano). */
 export function IntegranteCard({ nombre, rol, descripcion }: IntegranteCardProps) {
   return (
     <div className="card border-0 shadow-sm p-3 h-100">

@@ -6,7 +6,6 @@ import { renderConRouter } from '@/test/renderConProveedores';
 import { ProductoCard } from './ProductoCard';
 
 test('debería mostrar el precio de oferta y entregar el producto a onAgregar al pulsar Añadir', async () => {
-  // Arrange
   const user = userEvent.setup();
   const producto: Producto = {
     id: 'TC001',
@@ -22,10 +21,8 @@ test('debería mostrar el precio de oferta y entregar el producto a onAgregar al
   const alAgregar = vi.fn(() => true);
   renderConRouter(<ProductoCard producto={producto} onAgregar={alAgregar} />);
 
-  // Act
   await user.click(screen.getByRole('button', { name: 'Agregar Torta Cuadrada de Chocolate al carrito' }));
 
-  // Assert
   expect(screen.getByText('Oferta')).toBeInTheDocument();
   expect(screen.getByText('$40.000')).toBeInTheDocument();
   expect(alAgregar).toHaveBeenCalledWith(producto);

@@ -7,7 +7,6 @@ interface AlertaProps {
   className?: string;
 }
 
-/** Mensaje de Bootstrap. Si no hay mensaje no renderiza nada (renderizado condicional). */
 export function Alerta({ mensaje, variante = 'danger', onCerrar, className = '' }: AlertaProps) {
   if (!mensaje) return null;
   return (

@@ -5,7 +5,6 @@ interface PaginacionProps {
   onCambiar: (pagina: number) => void;
 }
 
-/** Paginación de Bootstrap. No se renderiza si todo cabe en una página. */
 export function Paginacion({ pagina, total, tamanoPagina, onCambiar }: PaginacionProps) {
   const totalPaginas = Math.max(1, Math.ceil(total / Math.max(1, tamanoPagina)));
   if (totalPaginas <= 1) return null;

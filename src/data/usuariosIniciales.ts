@@ -1,9 +1,5 @@
 import type { UsuarioNuevo } from '@/types';
 
-/**
- * Usuarios semilla (uno por rol). RUN válidos por módulo 11, guardados sin puntos ni guion.
- * Solo los usa el repositorio local: con backend, estos datos viven en la base de datos.
- */
 export const USUARIOS_INICIALES: UsuarioNuevo[] = [
   {
     run: '173743882', nombre: 'Jorge', apellidos: 'Soto', email: 'jorgesoto@gmail.com', password: 'admin1',

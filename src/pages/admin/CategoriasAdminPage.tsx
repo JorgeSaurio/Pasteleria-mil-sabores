@@ -9,10 +9,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { categoriaRepositorio, productoRepositorio } from '@/services';
 import type { Categoria } from '@/types';
 
-/**
- * Categorías: tabla + formulario en línea para crear/editar.
- * El formulario es pequeño (un campo), por eso usa useState directo y no useFormulario.
- */
 export function CategoriasAdminPage() {
   const { notificar } = useNotificacion();
   const [editando, setEditando] = useState<Categoria | null>(null);

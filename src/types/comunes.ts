@@ -1,10 +1,5 @@
-/** Variantes visuales de Bootstrap usadas en alertas y notificaciones. */
 export type Variante = 'success' | 'warning' | 'danger' | 'info';
 
-/**
- * Respuesta uniforme de toda operación de escritura.
- * "errores" transporta errores por campo (como responde un backend ante HTTP 400/422).
- */
 export interface ResultadoOperacion<T> {
   ok: boolean;
   mensaje: string;
@@ -12,7 +7,6 @@ export interface ResultadoOperacion<T> {
   errores?: Record<string, string>;
 }
 
-/** Filtros comunes de listados. Con backend se traducen a query params. */
 export interface FiltroListado {
   busqueda?: string;
   categoriaId?: string;
@@ -21,7 +15,6 @@ export interface FiltroListado {
   tamanoPagina?: number;
 }
 
-/** Página de resultados. Con 16 productos parece excesivo; con un backend es lo estándar. */
 export interface Pagina<T> {
   items: T[];
   total: number;

@@ -1,9 +1,4 @@
-/**
- * Único punto de la app que toca localStorage / sessionStorage.
- * Todo acceso va envuelto en try/catch: el navegador puede bloquear el storage
- * (modo privado, cuota llena) o el JSON puede estar corrupto.
- */
-
+// Todo acceso usa try/catch. El navegador puede bloquear el storage.
 export const CLAVES = {
   productos: 'mil_sabores_productos',
   categorias: 'mil_sabores_categorias',
@@ -15,7 +10,6 @@ export const CLAVES = {
   sesion: 'mil_sabores_sesion',
 } as const;
 
-/** Claves que usaba el proyecto HTML. Se leen una vez para migrar datos y luego se borran. */
 export const CLAVES_LEGADAS = {
   inventario: 'mil_sabores_inventario',
   carrito: 'mil_sabores_carrito',
@@ -60,6 +54,6 @@ export function eliminar(clave: string, tipo: TipoAlmacen = 'local'): void {
   try {
     obtenerAlmacen(tipo)?.removeItem(clave);
   } catch {
-    /* sin acceso al storage: no hay nada que borrar */
+    // Sin acceso al storage. No hay nada que borrar.
   }
 }

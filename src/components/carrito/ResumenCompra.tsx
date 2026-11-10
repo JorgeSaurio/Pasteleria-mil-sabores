@@ -9,11 +9,9 @@ interface ResumenCompraProps {
   textoAccion: string;
   onAccion: () => void;
   accionDeshabilitada?: boolean;
-  /** Espacio para insertar contenido extra (ej. el cupón) sin que el resumen lo conozca. */
   children?: ReactNode;
 }
 
-/** Recibe montos YA calculados: no calcula nada, así sirve igual en Carrito y Checkout. */
 export function ResumenCompra({
   subtotal,
   descuento,

@@ -3,10 +3,6 @@ import { ImagenConRespaldo } from '@/components/shared/ImagenConRespaldo';
 import { BLOGS } from '@/data/blogs';
 import { NoEncontradoPage } from './NoEncontradoPage';
 
-/**
- * Detalle de UN blog (/blog/:id). El HTML original mostraba los dos artículos a la vez.
- * Renderizado condicional: video si tiene videoUrl, si no imagen.
- */
 export function DetalleBlogPage() {
   const { id } = useParams();
   const blog = BLOGS.find((b) => b.id === id);

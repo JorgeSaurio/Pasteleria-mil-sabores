@@ -6,17 +6,11 @@ import { formatearMoneda } from '@/utils/formato';
 
 interface DetalleOrdenClienteProps {
   orden: Orden;
-  /** Encabezado distinto para éxito / error. */
   encabezado: ReactNode;
-  /** Botones al pie (imprimir, reintentar...). */
   acciones?: ReactNode;
   etiquetaTotal: string;
 }
 
-/**
- * Cuerpo común de las vistas "compra exitosa" y "pago con error" (Figuras 7 y 8):
- * mismos datos, distinto encabezado y acciones → se reciben por props (composición).
- */
 export function DetalleOrdenCliente({ orden, encabezado, acciones, etiquetaTotal }: DetalleOrdenClienteProps) {
   return (
     <div className="container my-5">

@@ -8,10 +8,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { ordenRepositorio } from '@/services';
 import { formatearFecha, formatearMoneda, formatearRun } from '@/utils/formato';
 
-/**
- * Boleta (nuevo). Reutiliza DatosCompraSoloLectura y TablaResumenItems:
- * una boleta se ve igual para el cliente y para el administrador.
- */
 export function DetalleOrdenPage() {
   const { id = '' } = useParams();
   const { datos: orden, cargando } = useAsync(() => ordenRepositorio.obtenerPorId(id), [id]);

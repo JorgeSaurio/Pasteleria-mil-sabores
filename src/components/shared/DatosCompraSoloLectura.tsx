@@ -14,7 +14,6 @@ function Campo({ etiqueta, valor, col = 'col-md-4' }: { etiqueta: string; valor?
   );
 }
 
-/** Datos del cliente y envío en solo lectura (Figuras 7 y 8). Reutilizado en la boleta del admin. */
 export function DatosCompraSoloLectura({ cliente, envio }: DatosCompraSoloLecturaProps) {
   return (
     <>

@@ -5,7 +5,6 @@ import { exito, fallo, responder } from './utilidades';
 
 function cargarContactos(): Contacto[] {
   if (!existe(CLAVES.contactos)) {
-    // Migración del formato HTML: {nombrecontacto, correocontacto, comentariocontacto, fecha}
     const legado = leer<Record<string, string>[]>(CLAVES_LEGADAS.contactos, []).map((c, i) => ({
       id: `CT-LEGADO-${i}`,
       nombre: c.nombrecontacto ?? '',

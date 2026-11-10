@@ -5,7 +5,6 @@ import { renderConContextos } from '@/test/renderConProveedores';
 import { RutaProtegida } from './RutaProtegida';
 
 test('debería redirigir a /login cuando no hay sesión iniciada', () => {
-  // Arrange
   const rutas = (
     <Routes>
       <Route
@@ -20,10 +19,8 @@ test('debería redirigir a /login cuando no hay sesión iniciada', () => {
     </Routes>
   );
 
-  // Act
   renderConContextos(rutas, { ruta: '/admin', auth: { estado: 'anonimo', usuario: null } });
 
-  // Assert
   expect(screen.getByText('Pantalla de login')).toBeInTheDocument();
   expect(screen.queryByText('Contenido privado')).not.toBeInTheDocument();
 });

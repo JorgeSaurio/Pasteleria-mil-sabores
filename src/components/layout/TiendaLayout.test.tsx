@@ -5,7 +5,6 @@ import { renderConContextos } from '@/test/renderConProveedores';
 import { TiendaLayout } from './TiendaLayout';
 
 test('debería envolver la página actual entre el navbar y el footer', () => {
-  // Arrange
   const rutas = (
     <Routes>
       <Route element={<TiendaLayout />}>
@@ -14,10 +13,8 @@ test('debería envolver la página actual entre el navbar y el footer', () => {
     </Routes>
   );
 
-  // Act
   renderConContextos(rutas, { ruta: '/productos' });
 
-  // Assert
   expect(screen.getByRole('navigation')).toBeInTheDocument();
   expect(screen.getByRole('main')).toHaveTextContent('Catálogo');
   expect(screen.getByRole('contentinfo')).toBeInTheDocument();

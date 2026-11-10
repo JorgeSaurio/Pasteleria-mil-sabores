@@ -14,7 +14,6 @@ import type { Producto } from '@/types';
 
 const TAMANO_PAGINA = 10;
 
-/** Listado de inventario con búsqueda, paginación y eliminación confirmada por modal. */
 export function ProductosAdminPage() {
   const [parametros, setParametros] = useSearchParams();
   const pagina = Number(parametros.get('pagina') ?? '1') || 1;

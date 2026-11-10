@@ -4,7 +4,6 @@ import { formatearRun } from '@/utils/formato';
 
 interface TablaUsuariosProps {
   usuarios: Usuario[];
-  /** RUN del admin en sesión: no puede eliminarse a sí mismo. */
   runActual: string;
   onEliminar: (usuario: Usuario) => void;
 }

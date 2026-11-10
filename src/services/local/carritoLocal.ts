@@ -3,7 +3,6 @@ import type { ItemCarrito } from '@/types';
 import type { CarritoRepositorio } from '../contratos/CarritoRepositorio';
 import { CLAVES, eliminar, guardar, leer } from './storage';
 
-/** Acepta el formato nuevo {productoId, cantidad} y el del proyecto HTML {id, nombre, precio, cantidad...}. */
 function normalizarItem(crudo: unknown): ItemCarrito | null {
   if (!crudo || typeof crudo !== 'object') return null;
   const item = crudo as Record<string, unknown>;
@@ -13,10 +12,6 @@ function normalizarItem(crudo: unknown): ItemCarrito | null {
   return { productoId, cantidad: Math.min(cantidad, CANTIDAD_MAXIMA_ITEM) };
 }
 
-/**
- * Sin latencia simulada a propósito: el carrito vive en el navegador incluso con backend,
- * y un retardo haría "parpadear" el contador del navbar en cada carga.
- */
 export const carritoLocal: CarritoRepositorio = {
   async obtener() {
     const crudo = leer<unknown>(CLAVES.carrito, []);

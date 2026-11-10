@@ -2,7 +2,6 @@ import type { Blog } from '@/types';
 
 const LOGO = 'https://objectstorage.sa-santiago-1.oraclecloud.com/n/ax2isdqimwmu/b/bucket_jorge/o/images%2Flogo.jpeg';
 
-/** Contenido estático del blog (antes repetido en blog.html y detalle-blog.html). */
 export const BLOGS: Blog[] = [
   {
     id: '1',

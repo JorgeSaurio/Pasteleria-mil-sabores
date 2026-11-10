@@ -7,7 +7,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { ordenRepositorio, usuarioRepositorio } from '@/services';
 import { formatearRun } from '@/utils/formato';
 
-/** Historial de compras de un usuario (nuevo, Figura 10). */
 export function HistorialComprasPage() {
   const { run = '' } = useParams();
   const { datos, cargando } = useAsync(

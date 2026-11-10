@@ -2,19 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("grilla-productos");
   const filtro = document.getElementById("filtro-categoria");
 
-  // El filtro se arma con las categorías reales del inventario, no con una lista fija.
   if (typeof poblarSelectCategorias === "function") {
     poblarSelectCategorias(filtro, { todas: "Todas las categorías" });
   }
 
   if (!contenedor || typeof obtenerCatalogo !== "function") return;
 
-  /**
-   * Recorta el texto solo cuando realmente supera el largo permitido
-   * @param {string} texto
-   * @param {number} largo
-   * @returns {string}
-   */
   function resumir(texto, largo = 75) {
     const limpio = String(texto || "");
     return limpio.length > largo ? limpio.slice(0, largo).trimEnd() + "..." : limpio;

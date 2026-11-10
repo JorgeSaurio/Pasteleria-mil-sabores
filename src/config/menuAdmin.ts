@@ -4,17 +4,12 @@ export interface ItemMenuAdmin {
   titulo: string;
   descripcion: string;
   ruta: string;
-  /** Roles que ven esta opción. El backend debe aplicar la misma regla en sus endpoints. */
   roles: Rol[];
 }
 
 const TODOS: Rol[] = ['Administrador', 'Vendedor'];
 const SOLO_ADMIN: Rol[] = ['Administrador'];
 
-/**
- * Fuente ÚNICA del menú admin: la usan AdminSidebar y las tarjetas del Dashboard,
- * así el menú y las tarjetas nunca quedan desalineados.
- */
 export const MENU_ADMIN: ItemMenuAdmin[] = [
   { titulo: 'Dashboard', descripcion: 'Visión general de las métricas clave del sistema.', ruta: '/admin', roles: TODOS },
   { titulo: 'Órdenes', descripcion: 'Seguimiento de las órdenes de compra y sus boletas.', ruta: '/admin/ordenes', roles: TODOS },

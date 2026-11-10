@@ -9,10 +9,6 @@ import { useAsync } from '@/hooks/useAsync';
 import { useCarrito } from '@/hooks/useCarrito';
 import { categoriaRepositorio, productoRepositorio } from '@/services';
 
-/**
- * Vista Categorías (nueva, Figura 4). La categoría seleccionada vive en la URL
- * (/categorias/:categoriaId); sin parámetro se muestra la primera.
- */
 export function CategoriasPage() {
   const { categoriaId } = useParams();
   const { agregar } = useCarrito();

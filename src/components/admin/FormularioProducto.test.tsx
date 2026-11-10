@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { FormularioProducto } from './FormularioProducto';
 
 test('debería rechazar un precio de oferta mayor o igual al precio normal sin llamar a onEnviar', async () => {
-  // Arrange
   const user = userEvent.setup();
   const alEnviar = vi.fn();
   render(<FormularioProducto categorias={[{ id: 'TC', nombre: 'Tortas Cuadradas' }]} onEnviar={alEnviar} />);
@@ -16,10 +15,8 @@ test('debería rechazar un precio de oferta mayor o igual al precio normal sin l
   await user.type(screen.getByLabelText(/^Stock(?! crítico)/), '5');
   await user.type(screen.getByLabelText(/^Descripción/), 'Descripción de prueba');
 
-  // Act
   await user.click(screen.getByRole('button', { name: 'Guardar producto' }));
 
-  // Assert
   expect(screen.getByLabelText(/^Precio oferta/)).toHaveAccessibleDescription('Debe ser menor que el precio normal.');
   expect(alEnviar).not.toHaveBeenCalled();
 });

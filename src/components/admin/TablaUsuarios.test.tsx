@@ -13,16 +13,13 @@ const base: Omit<Usuario, 'run' | 'nombre' | 'rol'> = {
 };
 
 test('debería ocultar el botón Eliminar en la fila del usuario en sesión', () => {
-  // Arrange
   const usuarios: Usuario[] = [
     { ...base, run: '111111111', nombre: 'Admin', rol: 'Administrador' },
     { ...base, run: '123456785', nombre: 'Cliente', rol: 'Cliente' },
   ];
 
-  // Act
   renderConRouter(<TablaUsuarios usuarios={usuarios} runActual="111111111" onEliminar={vi.fn()} />);
 
-  // Assert
   const filaPropia = screen.getByRole('row', { name: /11\.111\.111-1/ });
   const filaOtra = screen.getByRole('row', { name: /12\.345\.678-5/ });
   expect(within(filaPropia).queryByRole('button', { name: 'Eliminar' })).not.toBeInTheDocument();

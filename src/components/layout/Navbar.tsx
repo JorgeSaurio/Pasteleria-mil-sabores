@@ -14,12 +14,6 @@ const ENLACES = [
   { ruta: '/contacto', texto: 'Contacto' },
 ];
 
-/**
- * Navbar ÚNICO de la tienda (antes copiado en 10 HTML).
- * - "abierto" es estado local: solo afecta a este componente (colapso en móvil).
- * - NavLink marca el enlace activo automáticamente.
- * - No se usa el JS de Bootstrap (data-bs-toggle) porque manipula el DOM por fuera de React.
- */
 export function Navbar() {
   const [abierto, setAbierto] = useState(false);
   const { totalItems } = useCarrito();
@@ -27,7 +21,6 @@ export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Al navegar, el menú móvil se cierra.
   useEffect(() => {
     setAbierto(false);
   }, [location.pathname]);

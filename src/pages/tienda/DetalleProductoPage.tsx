@@ -14,10 +14,6 @@ import { NoEncontradoPage } from './NoEncontradoPage';
 
 const MAXIMO_RELACIONADOS = 4;
 
-/**
- * Detalle de producto. El id viene de la URL (/productos/:id).
- * Si no existe se muestra "no encontrado" (el HTML mostraba el primer producto en silencio).
- */
 export function DetalleProductoPage() {
   const { id = '' } = useParams();
   const { agregar } = useCarrito();
@@ -28,7 +24,6 @@ export function DetalleProductoPage() {
     () => (producto ? categoriaRepositorio.obtenerPorId(producto.categoriaId) : Promise.resolve(null)),
     [producto?.categoriaId],
   );
-  // Relacionados: primero los de la misma categoría, con stock, sin el producto actual.
   const { datos: relacionados } = useAsync(async () => {
     if (!producto) return [];
     const { items } = await productoRepositorio.listar({ soloDisponibles: true });

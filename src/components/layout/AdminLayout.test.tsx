@@ -6,7 +6,6 @@ import { renderConContextos } from '@/test/renderConProveedores';
 import { AdminLayout } from './AdminLayout';
 
 test('debería mostrar al Vendedor solo los módulos permitidos y la página actual', () => {
-  // Arrange
   const vendedor: Usuario = {
     run: '123456785',
     nombre: 'Vera',
@@ -25,10 +24,8 @@ test('debería mostrar al Vendedor solo los módulos permitidos y la página act
     </Routes>
   );
 
-  // Act
   renderConContextos(rutas, { ruta: '/admin', auth: { estado: 'autenticado', usuario: vendedor } });
 
-  // Assert
   expect(screen.getByRole('heading', { level: 1, name: 'Dashboard' })).toBeInTheDocument();
   expect(screen.getByRole('link', { name: 'Órdenes' })).toBeInTheDocument();
   expect(screen.queryByRole('link', { name: 'Usuarios' })).not.toBeInTheDocument();

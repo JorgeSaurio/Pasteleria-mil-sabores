@@ -1,12 +1,5 @@
 import type { LineaCarrito, Producto } from '@/types';
 
-/**
- * Reglas de cálculo del carrito como funciones puras.
- * En el frontend sirven para MOSTRAR una estimación; el total oficial lo calcula
- * quien procesa el pago (repositorio local hoy, backend mañana).
- */
-
-/** Un producto está en oferta si tiene precioOferta válido y menor al precio normal. */
 export function estaEnOferta(producto: Producto): boolean {
   return (
     typeof producto.precioOferta === 'number' &&
@@ -15,7 +8,6 @@ export function estaEnOferta(producto: Producto): boolean {
   );
 }
 
-/** Precio que realmente se cobra hoy. */
 export function precioVigente(producto: Producto): number {
   return estaEnOferta(producto) ? (producto.precioOferta as number) : producto.precio;
 }
@@ -32,7 +24,6 @@ export function calcularSubtotal(lineas: Pick<LineaCarrito, 'subtotal'>[]): numb
   return lineas.reduce((acumulado, linea) => acumulado + linea.subtotal, 0);
 }
 
-/** porcentaje en formato 0..1 (0.1 = 10 %). */
 export function calcularDescuento(subtotal: number, porcentaje: number): number {
   if (porcentaje <= 0) return 0;
   return Math.round(subtotal * porcentaje);

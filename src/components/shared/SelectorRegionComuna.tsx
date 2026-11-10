@@ -4,21 +4,14 @@ import { CampoSelect } from './CampoSelect';
 interface SelectorRegionComunaProps {
   region: string;
   comuna: string;
-  /** Un solo callback con ambos valores: son datos acoplados. */
   onChange: (region: string, comuna: string) => void;
   errores?: { region?: string; comuna?: string };
-  /** Prefijo de ids para poder usar dos selectores en la misma página. */
   idPrefijo?: string;
   deshabilitado?: boolean;
 }
 
 const OPCIONES_REGION = REGIONES.map((r) => ({ valor: r, etiqueta: r }));
 
-/**
- * Porta js/region-comuna.js. Usado en Registro, Usuario admin, Perfil y Checkout.
- * Las comunas se DERIVAN de la región (no son estado). Al cambiar la región,
- * se emite comuna = '' para no dejar una comuna que pertenece a otra región.
- */
 export function SelectorRegionComuna({
   region,
   comuna,

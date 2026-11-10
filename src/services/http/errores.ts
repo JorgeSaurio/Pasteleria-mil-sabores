@@ -1,7 +1,3 @@
-/**
- * Error único de la capa HTTP. Cualquier fallo (red, timeout, 4xx, 5xx) se convierte en
- * ErrorApi, así las páginas manejan un solo tipo de error sin importar su origen.
- */
 export class ErrorApi extends Error {
   readonly status: number;
   readonly codigo: string;
@@ -16,7 +12,6 @@ export class ErrorApi extends Error {
   }
 }
 
-/** Mensaje legible para mostrar al usuario a partir de cualquier error. */
 export function mensajeDeError(error: unknown): string {
   if (error instanceof ErrorApi) return error.message;
   if (error instanceof Error && error.message) return error.message;

@@ -17,7 +17,6 @@ export default tseslint.config(
     },
   },
   {
-    // Los contextos exportan Provider + objeto Context a propósito (lo consumen los hooks de src/hooks).
     files: ['src/context/**/*.tsx'],
     rules: { 'react-refresh/only-export-components': 'off' },
   },

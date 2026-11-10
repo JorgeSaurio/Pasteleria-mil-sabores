@@ -12,16 +12,11 @@ const STOCK_POR_DEFECTO = 15;
 const STOCK_CRITICO_POR_DEFECTO = 5;
 const RUTAS_IMAGEN_LEGADAS = ['logo.jpeg', '../logo.jpeg', '../../logo.jpeg'];
 
-/** Convierte el nombre de categoría del proyecto HTML ("Tortas Cuadradas") en su id nuevo. */
 function categoriaIdDesdeNombre(nombre: string): string {
   const encontrada = CATEGORIAS_INICIALES.find((c) => c.nombre === nombre);
   return encontrada?.id ?? CATEGORIAS_INICIALES[0].id;
 }
 
-/**
- * Normaliza cualquier registro (semilla, storage, formulario o formato antiguo)
- * devolviendo siempre la misma forma. Porta normalizarProducto() de datos-catalogo.js.
- */
 function normalizarProducto(crudo: unknown): Producto | null {
   if (!crudo || typeof crudo !== 'object') return null;
   const p = crudo as Record<string, unknown>;
@@ -59,11 +54,6 @@ function normalizarLista(lista: unknown): Producto[] {
   return Array.isArray(lista) ? lista.map(normalizarProducto).filter((p): p is Producto => p !== null) : [];
 }
 
-/**
- * Lee el inventario. Orden de prioridad:
- * 1) clave nueva  2) inventario del proyecto HTML (se migra y se borra)  3) semilla.
- * Exportada (no es parte del contrato) porque pagoLocal necesita descontar stock.
- */
 export function cargarProductos(): Producto[] {
   if (existe(CLAVES.productos)) return normalizarLista(leer<unknown>(CLAVES.productos, []));
 

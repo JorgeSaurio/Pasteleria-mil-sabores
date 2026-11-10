@@ -6,7 +6,6 @@ interface ModuloAdminCardProps {
   ruta: string;
 }
 
-/** Tarjeta de acceso a una sección del panel (Figura 9). Se genera desde MENU_ADMIN. */
 export function ModuloAdminCard({ titulo, descripcion, ruta }: ModuloAdminCardProps) {
   return (
     <Link to={ruta} className="card border-0 shadow-sm h-100 text-decoration-none text-dark categoria-card">

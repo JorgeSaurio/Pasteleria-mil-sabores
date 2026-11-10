@@ -7,26 +7,19 @@ export type EstadoAuth = 'verificando' | 'autenticado' | 'anonimo';
 export interface AuthContextValor {
   usuario: Usuario | null;
   token: string | null;
-  /** "verificando" mientras se valida la sesión guardada al abrir la app. */
   estado: EstadoAuth;
   iniciarSesion: (credenciales: Credenciales) => Promise<ResultadoOperacion<Sesion>>;
   cerrarSesion: () => Promise<void>;
-  /** Tras editar el perfil, refresca los datos en memoria sin re-loguear. */
   actualizarUsuario: (usuario: Usuario) => void;
   tieneRol: (...roles: Rol[]) => boolean;
 }
 
 export const AuthContext = createContext<AuthContextValor | null>(null);
 
-/**
- * Sesión global. El rol aquí solo decide QUÉ SE MUESTRA;
- * quien autoriza de verdad es el backend en cada endpoint.
- */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [sesion, setSesion] = useState<Sesion | null>(null);
   const [estado, setEstado] = useState<EstadoAuth>('verificando');
 
-  // Al abrir la app: recuperar y validar la sesión guardada.
   useEffect(() => {
     let vigente = true;
     authRepositorio
@@ -42,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // El cliente HTTP emite este evento ante un 401 (token vencido o inválido).
+  // El cliente HTTP avisa cuando hay un 401.
   useEffect(() => {
     const alExpirar = () => {
       setSesion(null);

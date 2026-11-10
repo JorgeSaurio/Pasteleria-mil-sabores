@@ -1,4 +1,3 @@
-/** Regiones de Chile y sus comunas (migrado desde js/region-comuna.js). */
 export const REGIONES_COMUNAS: Record<string, string[]> = {
   "Arica y Parinacota": [
     "Arica",

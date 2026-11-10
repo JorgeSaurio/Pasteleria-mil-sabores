@@ -8,10 +8,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { categoriaRepositorio, productoRepositorio } from '@/services';
 import type { Producto } from '@/types';
 
-/**
- * Una sola página para crear (/admin/productos/nuevo) y editar (/admin/productos/:id/editar).
- * El modo lo decide la presencia de :id, igual que hacía admin-productos.js con ?id=.
- */
 export function ProductoFormPage() {
   const { id } = useParams();
   const navigate = useNavigate();

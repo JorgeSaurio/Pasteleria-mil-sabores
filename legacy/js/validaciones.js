@@ -63,8 +63,6 @@ inputs.forEach((input) => {
                     return;
                 }
 
-                // VALIDACÓN MODULO 11
-
                 const cuerpo = value.slice(0,-1);
                 const verificador = value.slice(-1).toLowerCase();
 
@@ -544,7 +542,6 @@ function iniciarSesion(){
 
 
 function mostrarMensaje(texto, tipo = "danger") {
-    // Elimina el mensaje anterior para no acumularlos
     const anterior = document.getElementById("mensaje-formulario");
     if (anterior) anterior.remove();
 

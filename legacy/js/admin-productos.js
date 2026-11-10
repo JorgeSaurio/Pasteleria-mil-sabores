@@ -1,16 +1,6 @@
-/**
- * Panel de administración de productos.
- *
- * No mantiene su propia copia del inventario: toda lectura y escritura pasa por
- * la capa de datos de js/datos-catalogo.js, que es la que comparte con la tienda.
- */
-
 const RUTA_FORMULARIO_PRODUCTO = "admin-form-productos.html";
 const RUTA_LISTADO_PRODUCTO = "admin-productos.html";
 
-// -------------------------------------------------------------
-// VISTA: admin-productos.html (Listado de Inventario)
-// -------------------------------------------------------------
 function inicializarVistaListado() {
   const tablaBody = document.getElementById("tabla-productos-body");
   if (!tablaBody) return;
@@ -59,7 +49,6 @@ function inicializarVistaListado() {
   });
 }
 
-// Acción de eliminación
 window.eliminarProductoAdmin = function (id) {
   if (typeof eliminarProducto !== "function") return;
 
@@ -95,7 +84,6 @@ function inicializarVistaFormulario() {
   const inputImagen = document.getElementById("prod-imagen");
   const inputDescripcion = document.getElementById("prod-descripcion");
 
-  // Las categorías salen del inventario, no de una lista fija en el HTML.
   poblarSelectCategorias(selectCategoria);
 
   let modoEdicion = false;
@@ -108,9 +96,8 @@ function inicializarVistaFormulario() {
       subtituloVista.textContent = `Actualizando información para el código ${productoExistente.id}`;
       btnGuardar.textContent = "Actualizar Cambios";
 
-      // Llenar campos
       inputCodigo.value = productoExistente.id;
-      inputCodigo.readOnly = true; // No modificar llave primaria
+      inputCodigo.readOnly = true;
       inputNombre.value = productoExistente.nombre;
       selectCategoria.value = productoExistente.categoria;
       inputPrecio.value = productoExistente.precio;

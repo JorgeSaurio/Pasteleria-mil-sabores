@@ -1,15 +1,9 @@
 import { CANTIDAD_MAXIMA_ITEM } from '@/config/constantes';
 import type { ItemCarrito, ResultadoCupon } from '@/types';
 
-/**
- * Reducer PURO del carrito: todas las transiciones de estado en un solo lugar,
- * sin efectos secundarios (no toca storage ni notificaciones). Fácil de probar.
- */
-
 export interface EstadoCarrito {
   items: ItemCarrito[];
   cupon: ResultadoCupon | null;
-  /** false hasta leer lo guardado: evita sobrescribir el storage con un carrito vacío al iniciar. */
   cargado: boolean;
 }
 

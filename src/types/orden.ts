@@ -4,7 +4,6 @@ export type EstadoOrden = 'pagada' | 'rechazada';
 
 export type MedioPago = 'tarjeta' | 'transferencia' | 'prueba-rechazo';
 
-/** Copia histórica: la boleta conserva el precio pagado aunque el catálogo cambie. */
 export interface ItemOrden {
   productoId: string;
   nombre: string;
@@ -44,10 +43,7 @@ export interface Orden {
   motivoRechazo?: string;
 }
 
-/**
- * Lo que el frontend envía para pagar: SOLO decisiones del cliente.
- * No lleva precios ni total: los calcula quien procesa el pago (hoy el repositorio local, mañana el backend).
- */
+// No lleva precios. El total lo calcula quien cobra.
 export interface SolicitudPago {
   items: ItemCarrito[];
   cupon?: string;

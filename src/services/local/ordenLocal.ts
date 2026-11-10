@@ -11,7 +11,6 @@ export function cargarOrdenes(): Orden[] {
   return Array.isArray(lista) ? lista : [];
 }
 
-/** Usado por pagoLocal. Con backend, la numeración la asigna el servidor. */
 export function registrarOrden(orden: Omit<Orden, 'id' | 'numero'>): Orden {
   const ordenes = cargarOrdenes();
   const numero = ordenes.reduce((maximo, o) => Math.max(maximo, o.numero), NUMERO_INICIAL) + 1;
@@ -20,7 +19,6 @@ export function registrarOrden(orden: Omit<Orden, 'id' | 'numero'>): Orden {
   return completa;
 }
 
-/** Más recientes primero. */
 function ordenarPorFecha(lista: Orden[]): Orden[] {
   return [...lista].sort((a, b) => b.fecha.localeCompare(a.fecha));
 }

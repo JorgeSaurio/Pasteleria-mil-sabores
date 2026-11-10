@@ -5,7 +5,6 @@ import { useNotificacion } from '@/hooks/useNotificacion';
 import { usuarioRepositorio } from '@/services';
 import type { UsuarioNuevo } from '@/types';
 
-/** Perfil (nuevo): el usuario en sesión edita sus propios datos (sin cambiar su rol). */
 export function PerfilPage() {
   const { usuario, actualizarUsuario } = useAuth();
   const { notificar } = useNotificacion();

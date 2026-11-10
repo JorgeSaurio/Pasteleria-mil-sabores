@@ -7,11 +7,6 @@ import { rutasAdmin } from './rutasAdmin';
 import { rutasCatalogo } from './rutasCatalogo';
 import { rutasCompraCuenta } from './rutasCompraCuenta';
 
-/**
- * Árbol de rutas. Cada área aporta su propio arreglo de rutas en un archivo aparte
- * (rutasCatalogo, rutasCompraCuenta, rutasAdmin): así cada integrante edita SOLO su
- * archivo y los merges no chocan en este.
- */
 const rutas: RouteObject[] = [
   {
     path: '/',

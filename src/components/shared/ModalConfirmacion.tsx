@@ -1,5 +1,4 @@
 interface ModalConfirmacionProps {
-  /** Controlado por el padre: es el padre quien sabe qué se está por confirmar. */
   abierto: boolean;
   titulo: string;
   mensaje: string;
@@ -9,7 +8,6 @@ interface ModalConfirmacionProps {
   onCancelar: () => void;
 }
 
-/** Reemplaza confirm(): no bloquea el navegador y respeta el estilo del sitio. */
 export function ModalConfirmacion({
   abierto,
   titulo,

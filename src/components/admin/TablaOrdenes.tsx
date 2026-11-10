@@ -4,7 +4,6 @@ import { formatearFecha, formatearMoneda } from '@/utils/formato';
 
 interface TablaOrdenesProps {
   ordenes: Orden[];
-  /** En el historial de UN usuario la columna cliente sería redundante. */
   mostrarCliente?: boolean;
 }
 

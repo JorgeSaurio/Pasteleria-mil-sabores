@@ -27,11 +27,6 @@ const SEMILLA: ProductoSemilla[] = [
   { id: 'TE002', categoriaId: 'tortas-especiales', nombre: 'Torta Especial de Boda', precio: 60000, imagen: `${IMG}torta-boda.jpg`, descripcion: 'Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.' },
 ];
 
-/**
- * Catálogo semilla. Se usa solo la primera vez (cuando no hay nada guardado).
- * Igual que en el proyecto HTML, uno de cada tres productos parte con stock bajo
- * para que la alerta de stock crítico tenga datos que mostrar.
- */
 export const PRODUCTOS_INICIALES: Producto[] = SEMILLA.map((p, indice) => ({
   ...p,
   stock: indice % 3 === 0 ? STOCK_BAJO : STOCK_NORMAL,

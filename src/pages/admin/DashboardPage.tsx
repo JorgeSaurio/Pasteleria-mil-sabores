@@ -9,10 +9,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { ordenRepositorio, productoRepositorio, usuarioRepositorio } from '@/services';
 import { formatearMoneda } from '@/utils/formato';
 
-/**
- * Dashboard. Los indicadores se CALCULAN desde los repositorios
- * (el HTML tenía 16 / 0 / 3 escritos a mano). Las tarjetas salen de MENU_ADMIN.
- */
 export function DashboardPage() {
   const { usuario, tieneRol } = useAuth();
   const esAdmin = tieneRol('Administrador');
@@ -22,7 +18,6 @@ export function DashboardPage() {
       productoRepositorio.listar({ tamanoPagina: 1 }),
       productoRepositorio.listarCriticos(),
       ordenRepositorio.listar({ estado: 'pagada' }),
-      // Listar usuarios es exclusivo del administrador (con backend: endpoint protegido).
       esAdmin ? usuarioRepositorio.listar({ tamanoPagina: 1 }) : Promise.resolve(null),
     ]);
     return {

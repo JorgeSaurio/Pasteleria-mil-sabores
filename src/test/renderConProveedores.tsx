@@ -6,23 +6,12 @@ import { AuthContext, type AuthContextValor } from '@/context/AuthContext';
 import { CarritoContext, type CarritoContextValor } from '@/context/CarritoContext';
 import { NotificacionContext, type NotificacionContextValor } from '@/context/NotificacionContext';
 
-/**
- * Utilidades compartidas por las pruebas (NO es un test).
- * Los contextos se inyectan con valores FALSOS: así la prueba es unitaria y no toca
- * src/services ni localStorage como harían AuthProvider / CarritoProvider reales.
- */
-
-/**
- * Opt-in a los cambios de React Router v7: evita los avisos 'Future Flag Warning' en consola.
- * No cambia el comportamiento de Link/NavLink/Navigate que usan los componentes.
- */
 export const FLAGS_ROUTER = { v7_startTransition: true, v7_relativeSplatPath: true } as const;
 
 interface OpcionesRouter {
   ruta?: string;
 }
 
-/** Envuelve en MemoryRouter: necesario para Link, NavLink, Outlet, useLocation, useNavigate. */
 export function renderConRouter(ui: ReactElement, { ruta = '/' }: OpcionesRouter = {}) {
   return render(<MemoryRouter initialEntries={[ruta]} future={FLAGS_ROUTER}>{ui}</MemoryRouter>);
 }
@@ -75,7 +64,6 @@ interface OpcionesContextos extends OpcionesRouter {
   notificacion?: Partial<NotificacionContextValor>;
 }
 
-/** MemoryRouter + los tres contextos con valores falsos tipados. */
 export function renderConContextos(
   ui: ReactElement,
   { auth, carrito, notificacion, ruta = '/' }: OpcionesContextos = {},

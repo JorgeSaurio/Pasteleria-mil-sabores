@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { FiltroCategoria } from './FiltroCategoria';
 
 test('debería llamar a onChange con el id de la categoría elegida', async () => {
-  // Arrange
   const user = userEvent.setup();
   const alCambiar = vi.fn();
   const categorias = [
@@ -13,9 +12,7 @@ test('debería llamar a onChange con el id de la categoría elegida', async () =
   ];
   render(<FiltroCategoria categorias={categorias} valor="" onChange={alCambiar} />);
 
-  // Act
   await user.selectOptions(screen.getByRole('combobox', { name: 'Filtrar por categoría' }), 'Productos sin azúcar');
 
-  // Assert
   expect(alCambiar).toHaveBeenCalledWith('PSA');
 });

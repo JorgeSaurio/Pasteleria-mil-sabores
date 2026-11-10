@@ -5,10 +5,6 @@ import { MENU_ADMIN } from '@/config/menuAdmin';
 import { useAuth } from '@/hooks/useAuth';
 import { AdminSidebar } from './AdminSidebar';
 
-/**
- * Estructura del panel admin: barra superior + menú lateral + contenido.
- * "sidebarAbierto" solo importa en pantallas chicas (en md+ el menú siempre se ve).
- */
 export function AdminLayout() {
   const [sidebarAbierto, setSidebarAbierto] = useState(false);
   const { usuario, cerrarSesion } = useAuth();
@@ -19,7 +15,7 @@ export function AdminLayout() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  if (!usuario) return null; // RutaProtegida ya garantiza sesión; esto solo satisface a TypeScript.
+  if (!usuario) return null;
 
   const itemsVisibles = MENU_ADMIN.filter((item) => item.roles.includes(usuario.rol));
 

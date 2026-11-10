@@ -6,10 +6,6 @@ interface CuponDescuentoProps {
   onAplicar: (codigo: string) => Promise<ResultadoCupon>;
 }
 
-/**
- * El texto que se escribe es estado LOCAL hasta presionar "Aplicar"; recién ahí se
- * comunica al contexto. Evita recalcular el total (o llamar al backend) por cada tecla.
- */
 export function CuponDescuento({ cuponActivo, onAplicar }: CuponDescuentoProps) {
   const [codigo, setCodigo] = useState(cuponActivo?.codigo ?? '');
   const [mensaje, setMensaje] = useState<{ texto: string; clase: string } | null>(
@@ -17,7 +13,6 @@ export function CuponDescuento({ cuponActivo, onAplicar }: CuponDescuentoProps) 
   );
   const [aplicando, setAplicando] = useState(false);
 
-  // Si el cupón guardado llega después del montaje (recarga directa en /carrito), se refleja.
   const codigoActivo = cuponActivo?.codigo;
   const mensajeActivo = cuponActivo?.mensaje;
   useEffect(() => {

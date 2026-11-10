@@ -9,7 +9,6 @@ import { requerido, validarEmail } from '@/utils/validaciones';
 
 const MAXIMO_COMENTARIO = 500;
 
-/** Formulario de contacto con validación en vivo y contador de caracteres. */
 export function ContactoPage() {
   const [resultado, setResultado] = useState<{ mensaje: string; variante: Variante } | null>(null);
 

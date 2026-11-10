@@ -2,7 +2,6 @@ import type { Categoria } from '@/types';
 
 interface FiltroCategoriaProps {
   categorias: Categoria[];
-  /** '' = todas. Controlado: la página es dueña del valor porque también lo usa para filtrar. */
   valor: string;
   onChange: (categoriaId: string) => void;
 }
