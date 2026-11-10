@@ -1,13 +1,24 @@
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from '@/context/AuthContext';
+import { CarritoProvider } from '@/context/CarritoContext';
+import { NotificacionProvider } from '@/context/NotificacionContext';
+import { AppRouter } from '@/routes/AppRouter';
+
 /**
- * App PROVISIONAL (Sección 1).
- * Solo existe para que el proyecto compile antes de que llegue la Sección 3,
- * que REEMPLAZA este archivo completo por el App con providers y router.
+ * Raíz de la app (reemplaza al App provisional de la Sección 1).
+ * Orden de providers: Notificación envuelve a Carrito porque el carrito notifica
+ * al agregar productos; Auth va antes porque Navbar y Checkout leen la sesión.
  */
 export default function App() {
   return (
-    <main className="container py-5 text-center">
-      <h1 className="font-titulo">Pastelería Mil Sabores</h1>
-      <p className="lead">Base del proyecto React lista. Esperando Secciones 2 y 3.</p>
-    </main>
+    <BrowserRouter>
+      <NotificacionProvider>
+        <AuthProvider>
+          <CarritoProvider>
+            <AppRouter />
+          </CarritoProvider>
+        </AuthProvider>
+      </NotificacionProvider>
+    </BrowserRouter>
   );
 }
